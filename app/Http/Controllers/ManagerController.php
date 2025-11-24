@@ -20,6 +20,7 @@ class ManagerController extends Controller
     {
         $request->validate([
             'name'     => 'required',
+            'username' => 'required',
             'email'    => 'required|email|unique:users,email',
             'phone'    => 'required|string|max:11',
             'role'     => 'required|in:accountant,operations,member',
@@ -28,6 +29,7 @@ class ManagerController extends Controller
 
         User::create([
             'name'     => $request->name,
+            'username' => $request->username,
             'email'    => $request->email,
             'phone'    => $request->phone,
             'role'     => $request->role,

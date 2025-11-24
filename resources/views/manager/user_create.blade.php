@@ -20,15 +20,22 @@
                                     @csrf
                                     <div class="row mb-3">
                                         <div class="row mb-3">
-                                            <label for="inputEnterYourName" class="col-sm-3 col-form-label">User
-                                                Name</label>
+                                            <label for="inputEnterYourName" class="col-sm-3 col-form-label">Name</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" placeholder="Enter Your Name"
                                                     value="{{ old('name') }}" name="name">
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="inputEmailAddress2" class="col-sm-3 col-form-label">User Email
+                                            <label for="inputEnterYourUserName" class="col-sm-3 col-form-label">User
+                                                Name</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="Enter Your Name"
+                                                    value="{{ old('username') }}" name="username">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="inputEmailAddress" class="col-sm-3 col-form-label">User Email
                                                 Address</label>
                                             <div class="col-sm-9">
                                                 <input type="email" class="form-control" placeholder="Email Address"
@@ -36,7 +43,7 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="inputPhoneNo2" class="col-sm-3 col-form-label">User Phone No</label>
+                                            <label for="inputPhoneNo" class="col-sm-3 col-form-label">User Phone No</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" placeholder="Phone No"
                                                     value="{{ old('phone') }}" name="phone">
@@ -60,7 +67,7 @@
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="inputChoosePassword2" class="col-sm-3 col-form-label">Choose
+                                            <label for="inputChoosePassword" class="col-sm-3 col-form-label">Choose
                                                 Password</label>
                                             <div class="col-sm-9">
                                                 <input type="password" class="form-control" placeholder="Choose Password"
