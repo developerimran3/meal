@@ -69,6 +69,7 @@
                             <h5 class="font-weight-bold mb-0">All Users</h5>
                         </div>
                     </div>
+                    @include('layouts.components.message')
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -78,10 +79,13 @@
                                     <th>#</th>
                                     <th>Photo</th>
                                     <th>Name</th>
+                                    <th>User Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Role</th>
-                                    <th>Status</th>
+                                    <th>Acc. Actived
+
+                                    </th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -96,14 +100,18 @@
                                             </div>
                                         </td>
                                         <td>{{ $item->name }}</td>
+                                        <td>{{ $item->username }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->phone }}</td>
                                         <td class="text-capitalize">{{ $item->role }}</td>
-                                        <td><a
-                                                class="text-capitalize btn btn-sm btn-primary radius-30">{{ $item->status }}</a>
-                                        </td>
+                                        <td class="text-capitalize">{{ $item->is_active }}</td>
                                         <td>
-                                            <a class="btn-sm btn-danger" href=""><i class="fa fa-trash"></i></a>
+                                            <form action="{{ route('user.delete', $item->id) }}" method="POST"
+                                                onsubmit="return confirm('Are you sure?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

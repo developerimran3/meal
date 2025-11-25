@@ -19,6 +19,13 @@
                 <div class="menu-title">Dashboard</div>
             </a>
         </li>
+        <li>
+            <a href="{{ route('index') }}">
+                <div class="parent-icon"><i class='bx bx-home-heart'></i>
+                </div>
+                <div class="menu-title">My Meals</div>
+            </a>
+        </li>
         @if (Auth::user()->role == 'manager')
             <li>
                 <a href="{{ route('user.create.show') }}">
@@ -111,10 +118,10 @@
                 </a>
             </li>
         @endif
-        <li class="menu-label">User Expense</li>
+        <li class="menu-label">Account</li>
         <li>
             <a href="{{ route('profile') }}">
-                <div class="parent-icon"><i class='bx bx-user-plus'></i>
+                <div class="parent-icon"><i class='bx bx-user-pin'></i>
                 </div>
                 <div class="menu-title">User Profile</div>
             </a>

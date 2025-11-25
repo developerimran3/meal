@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class logOutMiddleware
+class LogedinMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,8 +15,8 @@ class logOutMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!auth()->check()) {
-            return redirect()->route('loginView');
+        if (auth()->check()) {
+            return redirect()->route('dashboard');
         }
 
         return $next($request);

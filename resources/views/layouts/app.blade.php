@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/dark-theme.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/semi-dark.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/header-colors.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/header-colors.css') }}" />
     <title>Meal Managenment System</title>
 </head>
 

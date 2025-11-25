@@ -29,12 +29,23 @@
 <body>
     <div class="container">
         <div class="box">
-            <h2>{{ $subjectText }}</h2>
-            <p>{{ $bodyText }}</p>
+            <h2>Hello {{ $user->name }},</h2>
+
+            <p>Your account has been created successfully!</p>
+
+            <p><strong>Login Information:</strong></p>
+            <ul>
+                <li>Username: {{ $user->username }}</li>
+                <li>Email: {{ $user->email }}</li>
+                <li>Post: {{ $user->role }}</li>
+                <li>Password: {{ $password }}</li>
+            </ul>
+
+            <p>Please login and change your password.</p>
 
             <br>
+            <p>Regards,<br>Meal Management System</p>
 
-            <p>Regards,<br>Your App Team</p>
         </div>
     </div>
 </body>
