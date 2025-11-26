@@ -21,11 +21,20 @@
         </li>
         <li>
             <a href="{{ route('index') }}">
-                <div class="parent-icon"><i class='bx bx-home-heart'></i>
+                <div class="parent-icon"><i class='bx bx-restaurant'></i>
                 </div>
                 <div class="menu-title">My Meals</div>
             </a>
         </li>
+
+        @if (in_array(Auth::user()->role, ['manager', 'operations']))
+            <li>
+                <a href="{{ route('manager.meals.today') }}">
+                    <div class="parent-icon"><i class='bx bx-home-heart'></i></div>
+                    <div class="menu-title">Today Meals</div>
+                </a>
+            </li>
+        @endif
         @if (Auth::user()->role == 'manager')
             <li>
                 <a href="{{ route('user.create.show') }}">
@@ -84,13 +93,6 @@
                 <a href="#">
                     <div class="parent-icon"><i class='bx bx-home'></i>
                     </div>
-                    <div class="menu-title">My Mels</div>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <div class="parent-icon"><i class='bx bx-home'></i>
-                    </div>
                     <div class="menu-title">Bills & Payments</div>
                 </a>
             </li>
@@ -104,14 +106,14 @@
         @endif
         @if (Auth::user()->role == 'operations')
             <li>
-                <a href="#">
+                <a href="{{ route('bazar.view') }}">
                     <div class="parent-icon"><i class='bx bx-cart'></i>
                     </div>
                     <div class="menu-title">Deily Bazar</div>
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="#">
                     <div class="parent-icon"><i class='bx bx-home'></i>
                     </div>
                     <div class="menu-title">Bazar update</div>

@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\ManagerController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\OperationsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,6 +17,10 @@ Route::get('/forget-password', function () {
 
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+// Today Meals Show
+Route::get('/dashboard/meals/today', [MealController::class, 'todayMeals'])->name('manager.meals.today');
+// Delete One Meal
+Route::delete('/dashboard/meals/delete/{id}', [MealController::class, 'deleteMeal'])->name('manager.meal.delete');
 
 
 Route::middleware(['logedin'])->group(function () {
@@ -30,6 +35,16 @@ Route::middleware(['loginView'])->group(function () {
     Route::get('/dashboard/meal', [MealController::class, 'index'])->name('index');
     Route::post('/dashboard/meal/store', [MealController::class, 'store'])->name('meal.store');
 });
+
+
+
+Route::middleware(['auth', 'role:operations'])->group(function () {
+
+    Route::get('/operations/bazar', [OperationsController::class, 'viewBazar'])->name('bazar.view');
+    Route::post('/operations/bazar', [OperationsController::class, 'storeBazar'])->name('bazar.store');
+});
+
+
 
 // Manager Routes (Role Based)
 Route::middleware(['role:manager'])->group(function () {
@@ -47,11 +62,6 @@ Route::middleware(['auth', 'role:accountant'])->group(function () {
     // Route::post('/accountant/expense', [AccountantController::class, 'storeExpense'])->name('accountant.expense.store');
 });
 
-Route::middleware(['auth', 'role:operations'])->group(function () {
-    // Route::get('/operations/dashboard', [OperationsController::class, 'index'])->name('operations.dashboard');
-    // Route::post('/operations/bazar', [OperationsController::class, 'storeBazar'])->name('operations.bazar.store');
-    // Route::post('/operations/meal', [OperationsController::class, 'storeMeal'])->name('operations.meal.store');
-});
 
 Route::middleware(['auth', 'role:member'])->group(function () {
     // Route::get('/member/dashboard', [MemberController::class, 'index'])->name('member.dashboard');

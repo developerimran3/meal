@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/semi-dark.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/header-colors.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/header-colors.css') }}" />
+    <!--plugins-->
+    <link href="{{ asset('assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
     <title>Meal Managenment System</title>
 </head>
 
@@ -71,8 +73,15 @@
     <script src="{{ asset('assets/plugins/highcharts/js/accessibility.js') }}"></script>
     <script src="{{ asset('assets/plugins/apexcharts-bundle/js/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/js/index2.js') }}"></script>
-    <!--app JS-->
+    <!--plugins-->
+    <script src="{{ asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
     <script>
         new PerfectScrollbar('.customers-list');
         new PerfectScrollbar('.store-metrics');

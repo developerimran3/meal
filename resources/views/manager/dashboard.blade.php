@@ -73,7 +73,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table mb-0 align-middle dataTable" id="dataTable">
+                        <table class="table mb-0 align-middle dataTable" id="example">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -83,9 +83,7 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Role</th>
-                                    <th>Acc. Actived
-
-                                    </th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -104,13 +102,13 @@
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->phone }}</td>
                                         <td class="text-capitalize">{{ $item->role }}</td>
-                                        <td class="text-capitalize">{{ $item->is_active }}</td>
+                                        <td class="text-capitalize">{{ $item->status }}</td>
                                         <td>
                                             <form action="{{ route('user.delete', $item->id) }}" method="POST"
                                                 onsubmit="return confirm('Are you sure?')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-danger btn-sm">Delete</button>
+                                                <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>

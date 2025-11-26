@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Meal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,5 +63,28 @@ class MealController extends Controller
             ]
         );
         return back()->with('success', 'Meal created');
+    }
+
+    // আজকের Meal দেখার মেথড
+    public function todayMeals()
+    {
+
+        $today = Carbon::today()->toDateString();
+
+        $meals = Meal::with('user')
+            ->whereDate('date', $today)
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return view('manager.meal-today', compact('meals'));
+    }
+
+    // Delete a meal
+    public function deleteMeal($id)
+    {
+        $meal = Meal::findOrFail($id);
+        $meal->delete();
+
+        return back()->with('success', 'Meal deleted successfully!');
     }
 }

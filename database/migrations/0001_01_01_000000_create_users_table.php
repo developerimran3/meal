@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
             $table->string('username')->unique();
+            $table->string('email')->unique();
             $table->string('password')->nullable();
             $table->enum('role', ['manager', 'accountant', 'operations', 'member'])->default('member');
             $table->string('phone')->unique();
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(false);
             $table->string('active_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->boolean('status')->default(true);
+            $table->enum('status', ['active', 'pandding'])->default('active');
             $table->boolean('trash')->default(false);
             $table->rememberToken();
             $table->timestamps();

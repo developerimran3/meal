@@ -44,6 +44,11 @@ class UserRegisterMail extends Mailable
     {
         return new Content(
             view: 'mail.userRegister',
+            with: [
+                $this->user,
+                $this->password
+            ],
+
         );
     }
 

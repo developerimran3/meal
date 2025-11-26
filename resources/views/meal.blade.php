@@ -8,7 +8,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-4">
                                 <div>
-                                    <p class="mb-0 text-black">Total Meals</p>
+                                    <p class="mb-0 text-black">Users Total Meal</p>
                                     <h5 class="mb-0 text-black">{{ $totalMeals }}</h5>
                                 </div>
                                 <div class="ms-auto text-black"><i class='bx bx-user font-30'></i>
@@ -118,36 +118,44 @@
                 </div>
                 <div class="col-lg-2"></div>
                 <div class="col-lg-5">
-                    <h4>Your Previous Meals</h4>
-                    <table class="table ">
-                        <thead>
-                            <tr class="text-center">
-                                <th>Date</th>
-                                <th>Breakfast</th>
-                                <th>Lunch</th>
-                                <th>Dinner</th>
-                                <th>Sub Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($meals as $meal)
-                                <tr class="text-center">
-                                    <td>{{ $meal->date }}</td>
-                                    <td>{{ $meal->breakfast }}</td>
-                                    <td>{{ $meal->lunch }}</td>
-                                    <td>{{ $meal->dinner }}</td>
-                                    <td>{{ $meal->breakfast + $meal->lunch + $meal->dinner }}</td>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Your Previous Meals</h4>
+                            <table class="table ">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Date</th>
+                                        <th>Breakfast</th>
+                                        <th>Lunch</th>
+                                        <th>Dinner</th>
+                                        <th>Sub Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($meals as $meal)
+                                        <tr class="text-center">
+                                            <td>{{ \Carbon\Carbon::parse($meal->date)->format('d M Y') }} </td>
+                                            <td>{{ $meal->breakfast }}</td>
+                                            <td>{{ $meal->lunch }}</td>
+                                            <td>{{ $meal->dinner }}</td>
+                                            <td>{{ $meal->breakfast + $meal->lunch + $meal->dinner }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                                <tr class=" customs-table text-center ">
+                                    <th>
+                                        <h4 class="text-primary m-0">Total = </h4>
+                                    </th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>
+                                        <h4 class="text-primary m-0"> {{ $totalMeals }}</h4>
+                                    </th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                        <tr class="bg-primary text-white text-center">
-                            <th>Total =</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>{{ $totalMeals }}</th>
-                        </tr>
-                    </table>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

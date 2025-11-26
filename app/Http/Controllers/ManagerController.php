@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Meal;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Mail\UserRegisterMail;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -41,7 +43,7 @@ class ManagerController extends Controller
             'role'     => $request->role,
             'password' => Hash::make($request->password),
         ]);
-        Mail::to($request->email)->send(new UserRegisterMail($user, $password));
+        Mail::to($user->email)->send(new UserRegisterMail($user, $password));
 
         return redirect()->back()->with('success', 'User created successfully!');
     }
