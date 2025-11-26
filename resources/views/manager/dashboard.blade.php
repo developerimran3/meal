@@ -4,42 +4,29 @@
         <div class="page-content">
             <div class="row row-cols-1 row-cols-lg-4">
                 <div class="col">
-                    <div class="card radius-10 overflow-hidden bg-gradient-cosmic">
+                    <div class="card radius-10 overflow-hidden ">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-4">
                                 <div>
-                                    <p class="mb-0 text-white">Total Users</p>
-                                    <h5 class="mb-0 text-white">{{ $user->count() }}</h5>
+                                    <p class="text-black">Total Users</p>
+                                    <h5 class="text-primary">{{ $user->count() }}</h5>
                                 </div>
-                                <div class="ms-auto text-white"><i class='bx bx-user font-30'></i>
+                                <div class="ms-auto text-primary"><i class='bx bx-restaurant font-30'></i>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col">
-                    <div class="card radius-10 overflow-hidden bg-gradient-burning">
+                    <div class="card radius-10 overflow-hidden">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-4">
                                 <div>
-                                    <p class="mb-0 text-white">Total Income</p>
-                                    <h5 class="mb-0 text-white">$52,945</h5>
+                                    <p class="text-black">Meals Rate</p>
+                                    <h5 class="text-primary">TK. 60.00</h5>
                                 </div>
-                                <div class="ms-auto text-white"><i class='bx bx-wallet font-30'></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card radius-10 overflow-hidden bg-gradient-Ohhappiness">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-4">
-                                <div>
-                                    <p class="mb-0 text-white">Total Users</p>
-                                    <h5 class="mb-0 text-white">24.5K</h5>
-                                </div>
-                                <div class="ms-auto text-white"><i class='bx bx-bulb font-30'></i>
+                                <div class="ms-auto text-primary"><i class='bx bx-bulb font-30'></i>
                                 </div>
                             </div>
 
@@ -47,14 +34,28 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card radius-10 overflow-hidden bg-gradient-moonlit">
+                    <div class="card radius-10 overflow-hidden">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-4">
                                 <div>
-                                    <p class="mb-0 text-white">Comments</p>
-                                    <h5 class="mb-0 text-white">869</h5>
+                                    <p class="text-black">Total Amount</p>
+                                    <h5 class="text-primary">TK. 869.00</h5>
                                 </div>
-                                <div class="ms-auto text-white"><i class='bx bx-chat font-30'></i>
+                                <div class="ms-auto text-primary"><i class='bx bx-chat font-30'></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card radius-10 overflow-hidden">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-4">
+                                <div>
+                                    <p class="text-black">Total Payments</p>
+                                    <h5 class="text-primary">TK. 869.00</h5>
+                                </div>
+                                <div class="ms-auto text-primary"><i class='bx bx-chat font-30'></i>
                                 </div>
                             </div>
                         </div>

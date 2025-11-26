@@ -41,42 +41,53 @@ class MealController extends Controller
 
 
 
-        return view('meal', compact('meals', 'totalMeals'));
+        return view('meals.meal-create', compact('meals', 'totalMeals'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'date'      => 'required|date',
-            'breakfast' => 'required',
-            'lunch'     => 'required',
-            'dinner'    => 'required',
-
+            'breakfast' => 'required|integer|min:0',
+            'lunch'     => 'required|integer|min:0',
+            'dinner'    => 'required|integer|min:0',
         ]);
-        Meal::updateOrCreate(
-            [
-                "user_id"   => auth()->id(),
-                'date'      => $request->date,
-                'breakfast' => $request->breakfast ?? 0,
-                'lunch'     => $request->lunch ?? 0,
-                'dinner'    => $request->dinner ?? 0
-            ]
-        );
-        return back()->with('success', 'Meal created');
+
+        $userId = auth()->id();
+        $today = now()->toDateString();
+
+
+        // check if user already added meal today
+        $already = Meal::where('user_id', $userId)
+            ->whereDate('date', $today)
+            ->exists();
+
+        if ($already) {
+            return back()->withErrors(['You already added today\'s meal. You cannot add more than once!']);
+        }
+
+        Meal::create([
+            'user_id'   => $userId,
+            'date'      => $request->date,
+            'breakfast' => $request->breakfast,
+            'lunch'     => $request->lunch,
+            'dinner'    => $request->dinner,
+        ]);
+
+        return back()->with('success', 'Meal added successfully!');
     }
+
 
     // আজকের Meal দেখার মেথড
     public function todayMeals()
     {
-
-        $today = Carbon::today()->toDateString();
-
+        $today = now()->toDateString();
         $meals = Meal::with('user')
             ->whereDate('date', $today)
             ->orderBy('id', 'DESC')
             ->get();
 
-        return view('manager.meal-today', compact('meals'));
+        return view('meals.today-meal', compact('meals'));
     }
 
     // Delete a meal
@@ -86,5 +97,26 @@ class MealController extends Controller
         $meal->delete();
 
         return back()->with('success', 'Meal deleted successfully!');
+    }
+
+    public function mealSearch(Request $request)
+    {
+        $request->validate([
+            'date' => 'required|date'
+        ]);
+
+        $date = $request->date;
+
+        $meals = Meal::with('user')
+            ->whereDate('date', $date)
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        // Total meal for selected date
+        $totalMeals = $meals->sum(function ($m) {
+            return $m->breakfast + $m->lunch + $m->dinner;
+        });
+
+        return view('meals.meal-search', compact('meals', 'date', 'totalMeals'));
     }
 }

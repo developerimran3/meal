@@ -29,8 +29,9 @@
 
         @if (in_array(Auth::user()->role, ['manager', 'operations']))
             <li>
-                <a href="{{ route('manager.meals.today') }}">
-                    <div class="parent-icon"><i class='bx bx-home-heart'></i></div>
+                <a href="{{ route('meals.today') }}">
+                    <div class="parent-icon"><i class='bx bx-home-heart'></i>
+                    </div>
                     <div class="menu-title">Today Meals</div>
                 </a>
             </li>

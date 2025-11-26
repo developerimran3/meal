@@ -4,75 +4,64 @@
         <div class="page-content">
             <div class="row row-cols-1 row-cols-lg-4">
                 <div class="col">
-                    <div class="card radius-10 overflow-hidden bg-gradient-cosmic">
+                    <div class="card radius-10 overflow-hidden ">
                         <div class="card-body">
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center mb-4">
                                 <div>
-                                    <p class="mb-0 text-white">Total Orders</p>
-                                    <h5 class="mb-0 text-white">867</h5>
+                                    <p class="text-black">My Total Meal</p>
+                                    <h5 class="text-primary">{{ $totalMeals }}</h5>
                                 </div>
-                                <div class="ms-auto text-white"><i class='bx bx-cart font-30'></i>
+                                <div class="ms-auto text-primary"><i class='bx bx-restaurant font-30'></i>
                                 </div>
-                            </div>
-                            <div class="progress bg-white-2 radius-10 mt-4" style="height:4.5px;">
-                                <div class="progress-bar bg-white" role="progressbar" style="width: 46%"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card radius-10 overflow-hidden bg-gradient-burning">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <p class="mb-0 text-white">Total Income</p>
-                                    <h5 class="mb-0 text-white">$52,945</h5>
-                                </div>
-                                <div class="ms-auto text-white"><i class='bx bx-wallet font-30'></i>
-                                </div>
-                            </div>
-                            <div class="progress bg-white-2 radius-10 mt-4" style="height:4.5px;">
-                                <div class="progress-bar bg-white" role="progressbar" style="width: 72%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card radius-10 overflow-hidden bg-gradient-Ohhappiness">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <p class="mb-0 text-white">Total Users</p>
-                                    <h5 class="mb-0 text-white">24.5K</h5>
-                                </div>
-                                <div class="ms-auto text-white"><i class='bx bx-bulb font-30'></i>
-                                </div>
-                            </div>
-                            <div class="progress bg-white-2 radius-10 mt-4" style="height:4.5px;">
-                                <div class="progress-bar bg-white" role="progressbar" style="width: 68%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card radius-10 overflow-hidden bg-gradient-moonlit">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <p class="mb-0 text-white">Comments</p>
-                                    <h5 class="mb-0 text-white">869</h5>
-                                </div>
-                                <div class="ms-auto text-white"><i class='bx bx-chat font-30'></i>
-                                </div>
-                            </div>
-                            <div class="progress  bg-white-2 radius-10 mt-4" style="height:4.5px;">
-                                <div class="progress-bar bg-white" role="progressbar" style="width: 66%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!--end row-->
 
+                <div class="col">
+                    <div class="card radius-10 overflow-hidden">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-4">
+                                <div>
+                                    <p class="text-black">Total Meal</p>
+                                    <h5 class="text-primary">{{ $totalMeals }}</h5>
+                                </div>
+                                <div class="ms-auto text-primary"><i class='bx bx-bulb font-30'></i>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card radius-10 overflow-hidden">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-4">
+                                <div>
+                                    <p class="text-black">Total Amount</p>
+                                    <h5 class="text-primary">TK. 869.00</h5>
+                                </div>
+                                <div class="ms-auto text-primary"><i class='bx bx-chat font-30'></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card radius-10 overflow-hidden">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-4">
+                                <div>
+                                    <p class="text-black">Total Payments</p>
+                                    <h5 class="text-primary">TK. 869.00</h5>
+                                </div>
+                                <div class="ms-auto text-primary"><i class='bx bx-chat font-30'></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="card radius-10">
                 <div class="card-header border-bottom-0 bg-transparent">
                     <div class="d-lg-flex align-items-center">
@@ -125,9 +114,9 @@
                 <div class="col-12 col-lg-4">
                     <div class="card radius-10 bg-primary">
                         <div class="card-body">
-                            <h6 class="text-white">Active Visitors</h6>
-                            <h4 class="font-weight-bold text-white">3467</h4>
-                            <p class="font-13 text-white">Page view per minute</p>
+                            <h6 class="text-black">Active Visitors</h6>
+                            <h4 class="font-weight-bold text-black">3467</h4>
+                            <p class="font-13 text-black">Page view per minute</p>
                             <div id="chart3"></div>
                         </div>
                     </div>
@@ -217,10 +206,10 @@
                                     <div id="chart5"></div>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div>
-                                            <h4 class="mb-0 font-weight-bold text-white">$534.8</h4>
-                                            <p class="mb-0 text-white">Average Weekly Sales</p>
+                                            <h4 class="mb-0 font-weight-bold text-black">$534.8</h4>
+                                            <p class="mb-0 text-black">Average Weekly Sales</p>
                                         </div>
-                                        <div><i class='bx bx-diamond font-24 text-white'></i>
+                                        <div><i class='bx bx-diamond font-24 text-black'></i>
                                         </div>
                                     </div>
                                 </div>

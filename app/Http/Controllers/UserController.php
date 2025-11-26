@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Meal;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,20 +36,39 @@ class UserController extends Controller
         return redirect()->route('loginView');
     }
 
-
-
-
     public function goDashboard()
     {
         if (Auth::check() && Auth::user()->role == 'manager') {
             $user = User::all();
             return view('manager.dashboard', compact('user'));
         } elseif (Auth::check() && Auth::user()->role == 'member') {
-            return view('members.dashboard');
+            $user = auth()->user();
+
+            $meals = $user->meals()->whereMonth('date', now()->month)
+                ->orderBy('date', 'DESC')
+                ->get();
+            // $payments = $user->payments()->whereMonth('date', now()->month)->get();
+
+            // calculate totals
+            $totalMeals = $meals->sum(function ($m) {
+                return $m->breakfast + $m->lunch + $m->dinner;
+            });
+
+            return view('members.dashboard', compact('meals', 'totalMeals'));
         } elseif (Auth::check() && Auth::user()->role == 'accountant') {
             return view('accountant.dashboard');
         } elseif (Auth::check() && Auth::user()->role == 'operations') {
-            return view('operations.dashboard');
+
+            $today = Carbon::today()->toDateString();
+            $meals = Meal::with('user')
+                ->whereDate('date', $today)
+                ->get();
+            // calculate totals
+            $totalMeals = $meals->sum(function ($m) {
+                return $m->breakfast + $m->lunch + $m->dinner;
+            });
+
+            return view('operations.dashboard', compact('meals', 'totalMeals'));
         }
     }
 
@@ -64,8 +85,6 @@ class UserController extends Controller
             return view('setting');
         }
     }
-
-
 
     public function update(Request $request)
     {
