@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BazarController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\OperationsController;
 
@@ -37,8 +38,8 @@ Route::middleware(['loginView'])->group(function () {
 
 
 Route::middleware(['auth', 'role:operations'])->group(function () {
-    Route::get('/operations/bazar', [OperationsController::class, 'viewBazar'])->name('bazar.view');
-    Route::post('/operations/bazar', [OperationsController::class, 'storeBazar'])->name('bazar.store');
+    Route::get('/dashboard/bazar', [BazarController::class, 'viewBazar'])->name('bazar.view');
+    Route::post('/dashboard/bazar', [BazarController::class, 'storeBazar'])->name('bazar.store');
 });
 
 // Manager Routes (Role Based)
