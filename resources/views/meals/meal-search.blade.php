@@ -20,7 +20,7 @@
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <div class="d-flex justify-content-between mb-4">
                                 <h5 class="text-primary ">Total Meals: {{ $totalMeals }}</h5>
-                                <h5 class="text-primary">Date: {{ $date }}</h5>
+                                <h5 class="text-primary">Meals of Date: {{ $date }}</h5>
                             </div>
                             @include('layouts.components.message')
                             <thead>

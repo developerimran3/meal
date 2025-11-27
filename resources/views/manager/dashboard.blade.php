@@ -11,7 +11,7 @@
                                     <p class="text-black">Total Users</p>
                                     <h5 class="text-primary">{{ $user->count() }}</h5>
                                 </div>
-                                <div class="ms-auto text-primary"><i class='bx bx-restaurant font-30'></i>
+                                <div class="ms-auto text-primary"><i class='bx bx-user font-30'></i>
                                 </div>
                             </div>
                         </div>
@@ -23,8 +23,8 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-4">
                                 <div>
-                                    <p class="text-black">Meals Rate</p>
-                                    <h5 class="text-primary">TK. 60.00</h5>
+                                    <p class="text-black">Total Meals for {{ $thisMonth }} Month</p>
+                                    <h5 class="text-primary">{{ $monthMeals }}</h5>
                                 </div>
                                 <div class="ms-auto text-primary"><i class='bx bx-bulb font-30'></i>
                                 </div>

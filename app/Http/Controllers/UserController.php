@@ -40,35 +40,51 @@ class UserController extends Controller
     {
         if (Auth::check() && Auth::user()->role == 'manager') {
             $user = User::all();
-            return view('manager.dashboard', compact('user'));
+            /** Month Meal Show */
+            $thisMonth = Carbon::now()->format('F');
+            $currentMonth = Carbon::now()->month;
+            $meals = Meal::with('user')
+                ->whereMonth('date', $currentMonth)
+                ->get();
+            // সব user এর পুরো মাসের total meals
+            $monthMeals = $meals->sum(function ($m) {
+                return $m->breakfast + $m->lunch + $m->dinner;
+            });
+            return view('manager.dashboard', compact('user', 'meals', 'monthMeals', 'thisMonth'));
         } elseif (Auth::check() && Auth::user()->role == 'member') {
-            $user = auth()->user();
 
+            /** My Meal Show */
+            $user = auth()->user();
             $meals = $user->meals()->whereMonth('date', now()->month)
                 ->orderBy('date', 'DESC')
                 ->get();
-            // $payments = $user->payments()->whereMonth('date', now()->month)->get();
-
-            // calculate totals
             $totalMeals = $meals->sum(function ($m) {
                 return $m->breakfast + $m->lunch + $m->dinner;
             });
-
             return view('members.dashboard', compact('meals', 'totalMeals'));
         } elseif (Auth::check() && Auth::user()->role == 'accountant') {
             return view('accountant.dashboard');
         } elseif (Auth::check() && Auth::user()->role == 'operations') {
+            /** Month Meal Show For All Users*/
+            $thisMonth = Carbon::now()->format('F');
+            $currentMonth = Carbon::now()->month;
+            $meals = Meal::with('user')
+                ->whereMonth('date', $currentMonth)
+                ->get();
+            // সব user এর পুরো মাসের total meals
+            $monthMeals = $meals->sum(function ($m) {
+                return $m->breakfast + $m->lunch + $m->dinner;
+            });
 
+            /** Today Meal Show */
             $today = Carbon::today()->toDateString();
             $meals = Meal::with('user')
                 ->whereDate('date', $today)
                 ->get();
-            // calculate totals
             $totalMeals = $meals->sum(function ($m) {
                 return $m->breakfast + $m->lunch + $m->dinner;
             });
-
-            return view('operations.dashboard', compact('meals', 'totalMeals'));
+            return view('operations.dashboard', compact('meals', 'totalMeals', 'monthMeals', 'thisMonth'));
         }
     }
 

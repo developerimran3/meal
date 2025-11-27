@@ -18,14 +18,13 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col">
                         <div class="card radius-10 overflow-hidden">
                             <div class="card-body">
                                 <div class="d-flex align-items-center mb-4">
                                     <div>
-                                        <p class="text-black">Total Meal</p>
-                                        <h5 class="text-primary">{{ $totalMeals }}</h5>
+                                        <p class="text-black">Meal Rate</p>
+                                        <h5 class="text-primary">Tk. 20.00</h5>
                                     </div>
                                     <div class="ms-auto text-primary"><i class='bx bx-bulb font-30'></i>
                                     </div>
@@ -64,9 +63,8 @@
                     </div>
                 </div>
             @endif
-
-            <div class="row mt-5">
-                {{-- Meals --}}
+            {{-- Meals --}}
+            <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
                         <div class="card-body">

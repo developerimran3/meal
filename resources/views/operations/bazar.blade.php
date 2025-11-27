@@ -7,8 +7,7 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4>Your Daily Bazar Entry</h4>
-                            <br>
+                            <h6 class="text-primary">Your Daily Bazar Entry</h6>
                             <br>
                             @include('layouts.components.message')
                             <form action="{{ route('bazar.store') }}" method="POST">
