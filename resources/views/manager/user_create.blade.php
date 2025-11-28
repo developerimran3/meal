@@ -49,8 +49,47 @@
                                                     value="{{ old('phone') }}" name="phone">
                                             </div>
                                         </div>
+
                                         <div class="row mb-3">
-                                            <label class="col-sm-3 col-form-label">User Role</label>
+                                            <label class="col-sm-3 col-form-label">Set No</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" name="set_no">
+                                                    <option>Choose...</option>
+                                                    <option value="1"{{ old('set_no') == '1' ? 'selected' : '' }}>
+                                                        1
+                                                    </option>
+                                                    <option value="2"{{ old('set_no') == '2' ? 'selected' : '' }}>
+                                                        2
+                                                    </option>
+                                                    <option value="3"{{ old('set_no') == '3' ? 'selected' : '' }}>
+                                                        3
+                                                    </option>
+                                                    <option value="4"{{ old('set_no') == '4' ? 'selected' : '' }}>
+                                                        4
+                                                    </option>
+                                                    <option value="5"{{ old('set_no') == '5' ? 'selected' : '' }}>
+                                                        5
+                                                    </option>
+                                                    <option value="6"{{ old('set_no') == '6' ? 'selected' : '' }}>
+                                                        6
+                                                    </option>
+                                                    <option value="7"{{ old('set_no') == '7' ? 'selected' : '' }}>
+                                                        7
+                                                    </option>
+                                                    <option value="8"{{ old('set_no') == '8' ? 'selected' : '' }}>
+                                                        8
+                                                    </option>
+                                                    <option value="9"{{ old('set_no') == '9' ? 'selected' : '' }}>
+                                                        9
+                                                    </option>
+                                                    <option value="10"{{ old('set_no') == '10' ? 'selected' : '' }}>
+                                                        10
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label class="col-sm-3 col-form-label">Role</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="role">
                                                     <option>Choose...</option>

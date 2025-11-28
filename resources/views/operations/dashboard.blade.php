@@ -8,8 +8,8 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-4">
                                 <div>
-                                    <p class="text-black">Total Meals for {{ $thisMonth }} Month</p>
-                                    <h5 class="text-primary">{{ $monthMeals }}</h5>
+                                    <p class="text-black">Today Total Meal</p>
+                                    <h5 class="text-primary">Today: {{ $totalMeals }} meals</h5>
                                 </div>
                                 <div class="ms-auto text-primary"><i class='bx bx-restaurant font-30'></i>
                                 </div>
@@ -23,8 +23,8 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-4">
                                 <div>
-                                    <p class="text-black">Today Total Meal</p>
-                                    <h5 class="text-primary">{{ $totalMeals }}</h5>
+                                    <p class="text-black">Total Meals for {{ $thisMonth }} Month</p>
+                                    <h5 class="text-primary">Total Meals: {{ $monthMeals }}</h5>
                                 </div>
                                 <div class="ms-auto text-primary"><i class='bx bx-bulb font-30'></i>
                                 </div>
@@ -39,7 +39,7 @@
                             <div class="d-flex align-items-center mb-4">
                                 <div>
                                     <p class="text-black">Total Bazar Cost</p>
-                                    <h5 class="text-primary">TK. 869.00</h5>
+                                    <h5 class="text-primary">TK. {{ $totalBazar }}</h5>
                                 </div>
                                 <div class="ms-auto text-primary"><i class='bx bx-chat font-30'></i>
                                 </div>

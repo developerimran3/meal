@@ -18,7 +18,7 @@ class User extends AuthUser
         'address',
         'photo',
         'dob',
-        'gender'
+        'set_no'
     ];
     public function meals()
     {

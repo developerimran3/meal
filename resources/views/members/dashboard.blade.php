@@ -9,7 +9,7 @@
                             <div class="d-flex align-items-center mb-4">
                                 <div>
                                     <p class="text-black">My Total Meal</p>
-                                    <h5 class="text-primary">Meal= {{ $totalMeals }}</h5>
+                                    <h5 class="text-primary">Total: {{ $totalMeals }} meals</h5>
                                 </div>
                                 <div class="ms-auto text-primary"><i class='bx bx-restaurant font-30'></i>
                                 </div>
@@ -24,7 +24,7 @@
                             <div class="d-flex align-items-center mb-4">
                                 <div>
                                     <p class="text-black">Meals Rate</p>
-                                    <h5 class="text-primary">TK. 60.00</h5>
+                                    <h5 class="text-primary">TK. {{ $mealRate }}</h5>
                                 </div>
                                 <div class="ms-auto text-primary"><i class='bx bx-bulb font-30'></i>
                                 </div>
@@ -39,7 +39,7 @@
                             <div class="d-flex align-items-center mb-4">
                                 <div>
                                     <p class="text-black">Total Amount</p>
-                                    <h5 class="text-primary">TK. 869.00</h5>
+                                    <h5 class="text-primary">TK. {{ $mealCost }}</h5>
                                 </div>
                                 <div class="ms-auto text-primary"><i class='bx bx-chat font-30'></i>
                                 </div>
@@ -53,7 +53,7 @@
                             <div class="d-flex align-items-center mb-4">
                                 <div>
                                     <p class="text-black">Total Payments</p>
-                                    <h5 class="text-primary">TK. 869.00</h5>
+                                    <h5 class="text-primary">TK. 0.00</h5>
                                 </div>
                                 <div class="ms-auto text-primary"><i class='bx bx-chat font-30'></i>
                                 </div>

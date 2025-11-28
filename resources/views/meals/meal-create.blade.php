@@ -10,7 +10,7 @@
                                 <div class="d-flex align-items-center mb-4">
                                     <div>
                                         <p class="text-black">My Total Meal</p>
-                                        <h5 class="text-primary">{{ $totalMeals }}</h5>
+                                        <h5 class="text-primary">Total: {{ $totalMeals }} meals</h5>
                                     </div>
                                     <div class="ms-auto text-primary"><i class='bx bx-restaurant font-30'></i>
                                     </div>
@@ -24,7 +24,7 @@
                                 <div class="d-flex align-items-center mb-4">
                                     <div>
                                         <p class="text-black">Meal Rate</p>
-                                        <h5 class="text-primary">Tk. 20.00</h5>
+                                        <h5 class="text-primary">Tk. {{ $mealRate }}</h5>
                                     </div>
                                     <div class="ms-auto text-primary"><i class='bx bx-bulb font-30'></i>
                                     </div>
@@ -39,7 +39,7 @@
                                 <div class="d-flex align-items-center mb-4">
                                     <div>
                                         <p class="text-black">Total Amount</p>
-                                        <h5 class="text-primary">TK. 869.00</h5>
+                                        <h5 class="text-primary">TK. {{ $mealCost }}</h5>
                                     </div>
                                     <div class="ms-auto text-primary"><i class='bx bx-chat font-30'></i>
                                     </div>
@@ -116,13 +116,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2"></div>
+                <div class="col-lg-1"></div>
                 <div class="col-lg-5">
                     <div class="card">
                         <div class="card-body">
                             <h6 class="text-primary">Your Previous Meals</h6>
                             <hr>
-                            <table class="table ">
+                            <table class="table align-middle ">
                                 <thead>
                                     <tr class="text-center">
                                         <th>Date</th>

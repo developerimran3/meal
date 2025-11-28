@@ -38,13 +38,17 @@ Route::middleware(['loginView'])->group(function () {
 
 
 Route::middleware(['auth', 'role:operations'])->group(function () {
-    Route::get('/dashboard/bazar', [BazarController::class, 'viewBazar'])->name('bazar.view');
+    Route::get('/dashboard/bazar/{id?}', [BazarController::class, 'viewBazar'])->name('bazar.view');
     Route::post('/dashboard/bazar', [BazarController::class, 'storeBazar'])->name('bazar.store');
+    Route::get('/dashboard/bazar/show/{id}', [BazarController::class, 'showRecipt'])->name('bazar.show');
+    Route::delete('/dashboard/bazar/delete/{id}', [BazarController::class, 'deleteBazar'])->name('bazar.delete');
+    Route::put('/dashboard/bazar/update/{id}', [BazarController::class, 'updateBazar'])->name('bazar.update');
 });
 
 // Manager Routes (Role Based)
 Route::middleware(['role:manager'])->group(function () {
     Route::get('/dashboard/update-role', [ManagerController::class, 'changeRole'])->name('user.change.role');
+    Route::post('/dashboard/update-set', [ManagerController::class, 'changeSet'])->name('user.change.set');
     Route::post('/dashboard/update-role', [ManagerController::class, 'changeRoleUpdate'])->name('changeRoleUpdate');
     Route::get('/dashboard/user-create', [ManagerController::class, 'userCreateShow'])->name('user.create.show');
     Route::post('/dashboard/user-create', [ManagerController::class, 'userCreate'])->name('user.create');

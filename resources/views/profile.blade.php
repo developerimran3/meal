@@ -41,15 +41,15 @@
                                         </li>
                                         <li
                                             class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0">Birth Day</h6>
+                                            <h6 class="mb-0">Date Of Birth</h6>
                                             <span
                                                 class="text-secondary">{{ Auth::user()->dob ? \Carbon\Carbon::parse(Auth::user()->dob)->format('d M Y') : 'Not Set' }}</span>
                                         </li>
                                         <li
                                             class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                            <h6 class="mb-0">Gender</h6>
+                                            <h6 class="mb-0">Set No</h6>
                                             <span
-                                                class="text-secondary text-capitalize">{{ Auth::user()->gender ? Auth::user()->gender : 'Not Set' }}</span>
+                                                class="text-secondary text-capitalize">{{ Auth::user()->set_no ? Auth::user()->set_no : 'Not Set' }}</span>
                                         </li>
                                         <li
                                             class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
@@ -102,22 +102,7 @@
                                                     value="{{ Auth::user()->dob }}" name="dob">
                                             </div>
                                         </div>
-                                        <div class="row mb-3">
-                                            <div class="col-sm-3">
-                                                <h6 class="mb-0">Gender</h6>
-                                            </div>
-                                            <div class="col-sm-9 text-secondary">
-                                                <select class="form-control" name="gender">
-                                                    <option>Choose...</option>
-                                                    <option value="male"
-                                                        {{ Auth::user()->gender == 'male' ? 'selected' : '' }}>Male
-                                                    </option>
-                                                    <option value="female"
-                                                        {{ Auth::user()->gender == 'female' ? 'selected' : '' }}>Female
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
+
                                         <div class="row mb-3">
                                             <div class="col-sm-3">
                                                 <h6 class="mb-0">Photo</h6>

@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <table id="example" class="table table-striped table-bordered align-middle" style="width:100%">
                             <div class="d-flex justify-content-between mb-4">
                                 <h5 class="text-primary ">Total Meals: {{ $totalMeals }}</h5>
                                 <h5 class="text-primary">Meals of Date: {{ $date }}</h5>

@@ -16,12 +16,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->string('password')->nullable();
+            $table->string('set_no')->unique();
             $table->enum('role', ['manager', 'accountant', 'operations', 'member'])->default('member');
             $table->string('phone')->unique();
             $table->string('photo')->nullable();
             $table->date('dob')->nullable();
-            $table->enum('gender', ['male', 'female'])->nullable();
+            $table->string('password')->nullable();
             $table->boolean('is_active')->default(false);
             $table->string('active_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();

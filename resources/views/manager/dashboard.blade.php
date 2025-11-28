@@ -8,8 +8,8 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-4">
                                 <div>
-                                    <p class="text-black">Total Users</p>
-                                    <h5 class="text-primary">{{ $user->count() }}</h5>
+                                    <p class="text-black">Total Members</p>
+                                    <h5 class="text-primary">Total: {{ $user->count() }} members</h5>
                                 </div>
                                 <div class="ms-auto text-primary"><i class='bx bx-user font-30'></i>
                                 </div>
@@ -24,7 +24,7 @@
                             <div class="d-flex align-items-center mb-4">
                                 <div>
                                     <p class="text-black">Total Meals for {{ $thisMonth }} Month</p>
-                                    <h5 class="text-primary">{{ $monthMeals }}</h5>
+                                    <h5 class="text-primary">Total Meals: {{ $monthMeals }}</h5>
                                 </div>
                                 <div class="ms-auto text-primary"><i class='bx bx-bulb font-30'></i>
                                 </div>
@@ -83,6 +83,7 @@
                                     <th>User Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
+                                    <th>Set No</th>
                                     <th>Role</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -95,14 +96,15 @@
                                         <td>
                                             <div class="product-img bg-transparent border">
                                                 <img src="{{ $item->photo ? asset('media/profile/' . $item->photo) : asset('/assets/images/demo.png') }}"
-                                                    class="p-1" alt="">
+                                                    alt="">
                                             </div>
                                         </td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->username }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->phone }}</td>
-                                        <td class="text-capitalize">{{ $item->role }}</td>
+                                        <td>Set- {{ $item->set_no }}</td>
+                                        <td class="text-capitalize fw-bold">{{ $item->role }}</td>
                                         <td class="text-capitalize">{{ $item->status }}</td>
                                         <td>
                                             <form action="{{ route('user.delete', $item->id) }}" method="POST"
