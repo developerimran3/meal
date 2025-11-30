@@ -3,7 +3,7 @@
     <div class="page-wrapper">
         <div class="page-content">
             @if (in_array(Auth::user()->role, ['manager', 'operations', 'accountant']))
-                <div class="row row-cols-1 row-cols-lg-4">
+                <div class="row row-cols-1 row-cols-lg-6">
                     <div class="col">
                         <div class="card radius-10 overflow-hidden ">
                             <div class="card-body">
@@ -52,6 +52,34 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center mb-4">
                                     <div>
+                                        <p class="text-black">Others Bill</p>
+                                        <h5 class="text-primary">TK. {{ $otherBills }}</h5>
+                                    </div>
+                                    <div class="ms-auto text-primary"><i class='bx bx-chat font-30'></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card radius-10 overflow-hidden">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-4">
+                                    <div>
+                                        <p class="text-black">Total Bill + Other Bill</p>
+                                        <h5 class="text-primary">TK. {{ $mealCost + $otherBills }}</h5>
+                                    </div>
+                                    <div class="ms-auto text-primary"><i class='bx bx-chat font-30'></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card radius-10 overflow-hidden">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-4">
+                                    <div>
                                         <p class="text-black">Total Payments</p>
                                         <h5 class="text-primary">TK. 869.00</h5>
                                     </div>
@@ -65,7 +93,7 @@
             @endif
             {{-- Meals --}}
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
                             <h6 class="text-primary">Your Daily Meal Entry</h6>
@@ -106,9 +134,8 @@
                                         <input type="number" class="form-control" name="dinner" value="1" />
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-8"></div>
-                                    <div class="col-sm-4 text-secondary">
+                                <div class="row text-end">
+                                    <div class="col-sm-12 text-secondary">
                                         <button type="submit" class="btn btn-primary px-4">Meal Create</button>
                                     </div>
                                 </div>
@@ -116,8 +143,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-1"></div>
-                <div class="col-lg-5">
+
+                <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
                             <h6 class="text-primary">Your Previous Meals</h6>

@@ -36,6 +36,17 @@
                 </a>
             </li>
         @endif
+
+        @if (in_array(Auth::user()->role, ['manager', 'accountant']))
+            <li>
+                <a href="{{ route('bill.index') }}">
+                    <div class="parent-icon"><i class='bx bx-home-heart'></i>
+                    </div>
+                    <div class="menu-title">Bill Create</div>
+                </a>
+            </li>
+        @endif
+
         @if (Auth::user()->role == 'manager')
             <li>
                 <a href="{{ route('user.create.show') }}">

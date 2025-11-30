@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bazars', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('operations_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('bill_id')->constrained()->onDelete('cascade');
+            $table->decimal('amount', 10, 2);
             $table->date('date');
-            $table->string('item')->nullable();
-            $table->decimal('amount', 12, 2);
-            $table->string('money_recipt');
+            $table->enum('status', ['paid', 'unpaid'])->default('unpaid');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bazars');
+        Schema::dropIfExists('payments');
     }
 };

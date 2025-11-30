@@ -16,7 +16,8 @@ class ManagerController extends Controller
      */
     public function userCreateShow()
     {
-        return view('manager.user_create');
+        $bookedSets = User::pluck('set_no')->toArray();
+        return view('manager.user_create', compact('bookedSets'));
     }
 
     /**
@@ -57,7 +58,8 @@ class ManagerController extends Controller
     public function changeRole(Request $request)
     {
         $user = User::all();
-        return view('manager.role-change', compact('user'));
+        $bookedSets = User::pluck('set_no')->toArray();
+        return view('manager.role-change', compact('user', 'bookedSets'));
     }
 
     /**
@@ -81,9 +83,10 @@ class ManagerController extends Controller
      */
     public function changeSet(Request $request)
     {
+
         $request->validate([
             'user_id'   => 'required',
-            // 'set_no'    => 'required|unique:users,set_no',
+
             'set_no'    => 'required|unique:users,set_no|in:1,2,3,4,5,6,7,8,9,10',
         ]);
         // Update Role And Set No

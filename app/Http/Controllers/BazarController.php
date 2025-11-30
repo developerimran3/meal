@@ -71,9 +71,9 @@ class BazarController extends Controller
         $bazar = Bazar::findOrFail($id);
 
         $request->validate([
-            'date'   => 'required|date',
-            'amount' => 'required|numeric',
-            'money_recipt' => 'nullable|image|mimes:jpg,jpeg,png'
+            'date'          => 'required|date',
+            'amount'        => 'required|numeric',
+            'money_recipt'  => 'nullable|image|mimes:jpg,jpeg,png'
         ]);
 
         // photo Uploade

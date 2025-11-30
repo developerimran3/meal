@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Breakfast</h6>
+                                        <h6 class="mb-0">Amount</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <input type="number" class="form-control" placeholder="Enter Amount"
@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Lunch</h6>
+                                        <h6 class="mb-0">Money Recipt</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <input type="file" class="form-control" name="money_recipt">

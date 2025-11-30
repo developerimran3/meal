@@ -54,6 +54,17 @@
                                             <label class="col-sm-3 col-form-label">Set No</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control" name="set_no">
+                                                    <option value="">Choose...</option>
+                                                    @for ($i = 1; $i <= 10; $i++)
+                                                        @if (!in_array($i, $bookedSets))
+                                                            <option value="{{ $i }}"
+                                                                {{ old('set_no') == $i ? 'selected' : '' }}>
+                                                                {{ $i }}
+                                                            </option>
+                                                        @endif
+                                                    @endfor
+                                                </select>
+                                                {{-- <select class="form-control" name="set_no">
                                                     <option>Choose...</option>
                                                     <option value="1"{{ old('set_no') == '1' ? 'selected' : '' }}>
                                                         1
@@ -85,7 +96,7 @@
                                                     <option value="10"{{ old('set_no') == '10' ? 'selected' : '' }}>
                                                         10
                                                     </option>
-                                                </select>
+                                                </select> --}}
                                             </div>
                                         </div>
                                         <div class="row mb-3">

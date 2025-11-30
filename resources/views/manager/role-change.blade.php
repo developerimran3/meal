@@ -77,8 +77,8 @@
                                 @csrf
                                 <div class="row mb-3">
                                     <div class="row mb-3">
-                                        <label for="inputEnterYourName" class="col-sm-3 col-form-label">User
-                                            Name & Role</label>
+                                        <label for="inputEnterUser" class="col-sm-3 col-form-label">User
+                                            Name & Set No</label>
                                         <div class="col-sm-9">
                                             <select name="user_id" class="form-control">
                                                 @foreach ($user as $item)
@@ -94,17 +94,12 @@
                                         <label class="col-sm-3 col-form-label">Set No</label>
                                         <div class="col-sm-9">
                                             <select class="form-control" name="set_no">
-                                                <option>Choose...</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
-                                                <option value="10">10</option>
+                                                <option value="">Choose...</option>
+                                                @for ($i = 1; $i <= 10; $i++)
+                                                    @if (!in_array($i, $bookedSets))
+                                                        <option value="{{ $i }}">{{ $i }}</option>
+                                                    @endif
+                                                @endfor
                                             </select>
                                         </div>
                                     </div>
@@ -115,6 +110,7 @@
                                             <button type="submit" class="btn btn-primary px-4">Change Seat</button>
                                         </div>
                                     </div>
+                                </div>
                             </form>
                         </div>
                     </div>

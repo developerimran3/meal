@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Bill;
 use App\Models\Meal;
+use App\Models\User;
 use App\Models\Bazar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,11 +35,18 @@ class MealController extends Controller
         $totalBazar = Bazar::whereMonth('date', $currentMonth)->sum('amount');
         // Meal Rate All user Same
         $mealRate = $allTotalMeals > 0 ? round($totalBazar / $allTotalMeals, 2) : 0;
-
         $mealCost = $totalMeals * $mealRate;
 
 
+        $currentMonth = now()->format('Y-m');
+
+        $bill = Bill::where('month', $currentMonth)->first();
+
+        $otherBills = $bill->total / $user->count();
+
+
         // $otherBills = $payments->whereIn('type', ['rent', 'wifi', 'khala'])->sum('amount'); // payments recorded as bills
+
         // $paid = $payments->sum('amount');
 
         // $totalBill = $mealCost + $otherBills;
@@ -45,7 +54,7 @@ class MealController extends Controller
 
         // return view('member.dashboard', compact('meals', 'payments', 'totalMeals', 'mealRate', 'mealCost', 'otherBills', 'paid', 'due'));
 
-        return view('meals.meal-create', compact('meals', 'totalMeals', 'mealRate', 'mealCost'));
+        return view('meals.meal-create', compact('meals', 'totalMeals', 'mealRate', 'mealCost', 'otherBills'));
     }
     /** 
      * Meal Create 

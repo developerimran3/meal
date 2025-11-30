@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BazarController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\ManagerController;
-use App\Http\Controllers\OperationsController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,6 +34,8 @@ Route::middleware(['loginView'])->group(function () {
     Route::get('/dashboard/meals/today', [MealController::class, 'todayMeals'])->name('meals.today');
     Route::delete('/dashboard/meals/delete/{id}', [MealController::class, 'deleteMeal'])->name('meal.delete');
     Route::get('/dashboard/meals/search', [MealController::class, 'mealSearch'])->name('meals.search');
+    Route::get('/dashboard/bill', [BillController::class, 'index'])->name('bill.index');
+    Route::post('/dashboard/bill/store', [BillController::class, 'storeBill'])->name('bill.store');
 });
 
 
