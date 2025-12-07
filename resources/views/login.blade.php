@@ -2,8 +2,9 @@
 <html lang="en">
 
 <head>
+    @include('layouts.components.main-header')
     <!-- Required meta tags -->
-    <meta charset="utf-8">
+    {{-- <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--favicon-->
     <link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
@@ -18,8 +19,8 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
     <link href="assets/css/app.css" rel="stylesheet">
-    <link href="assets/css/icons.css" rel="stylesheet">
-    <title>Synadmin – Bootstrap5 Admin Template</title>
+    <link href="assets/css/icons.css" rel="stylesheet"> --}}
+    <title>User Login</title>
 </head>
 
 <body>
@@ -28,7 +29,7 @@
         <div class="authentication-header"></div>
         <div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
             <div class="container-fluid">
-                <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+                <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
                     <div class="col mx-auto">
                         <div class="mb-4 text-center">
                             <img src="assets/images/logo-img.png" width="180" alt="" />
@@ -43,7 +44,7 @@
                                     <div class="login-separater text-center mb-4"> <span>OR SIGN IN WITH EMAIL</span>
                                         <hr />
                                     </div>
-                                    @include('layouts.components.message')
+
                                     <div class="form-body">
                                         <form class="row g-3" action="{{ route('login') }}" method="POST">
                                             @csrf
@@ -94,12 +95,12 @@
     </div>
     <!--end wrapper-->
     <!-- Bootstrap JS -->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    {{-- <script src="assets/js/bootstrap.bundle.min.js"></script>
     <!--plugins-->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
     <script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
-    <script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+    <script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script> --}}
     <!--Password show & hide js -->
     <script>
         $(document).ready(function() {
@@ -118,7 +119,8 @@
         });
     </script>
     <!--app JS-->
-    <script src="assets/js/app.js"></script>
+    {{-- <script src="assets/js/app.js"></script> --}}
+
 </body>
 
 </html>

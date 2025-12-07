@@ -22,7 +22,7 @@
                                 <h5 class="text-primary ">Total Meals: {{ $totalMeals }}</h5>
                                 <h5 class="text-primary">Meals of Date: {{ $date }}</h5>
                             </div>
-                            @include('layouts.components.message')
+
                             <thead>
                                 <tr>
                                     <th>Date</th>

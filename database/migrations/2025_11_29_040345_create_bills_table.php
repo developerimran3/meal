@@ -13,14 +13,11 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
-
-
-            $table->decimal('seat_rent', 10, 2)->default(0);
-            $table->decimal('wifi', 10, 2)->default(0);
-            $table->decimal('khala', 10, 2)->default(0);
-            $table->decimal('utility_bill', 10, 2)->default(0);
-            $table->decimal('total', 10, 2)->default(0);
-
+            $table->decimal('seat_rent', 10, 2)->nullable();
+            $table->decimal('wifi', 10, 2)->nullable();
+            $table->decimal('khala', 10, 2)->nullable();
+            $table->decimal('utility_bill', 10, 2)->nullable();
+            $table->decimal('total', 10, 2)->nullable();
             $table->string('month');
             $table->timestamps();
         });

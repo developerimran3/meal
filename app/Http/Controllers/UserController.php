@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Bill;
 use App\Models\Meal;
 use App\Models\User;
 use App\Models\Bazar;
+use App\Models\Payment;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Notifications\UserOtpSend;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -26,7 +31,7 @@ class UserController extends Controller
         ]);
         // Authentication logic goes here
         if (Auth::attempt($credential)) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('success', 'Login Successfull!');
         }
         return back()->withErrors([
             'password' => 'The password is incorrect.',
@@ -38,7 +43,7 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect()->route('loginView');
+        return redirect()->route('loginView')->with('success', 'Log Out Successfull!');
     }
 
     /**
@@ -59,32 +64,33 @@ class UserController extends Controller
             $monthMeals = $meals->sum(function ($m) {
                 return $m->breakfast + $m->lunch + $m->dinner;
             });
-            return view('manager.dashboard', compact('user', 'meals', 'monthMeals', 'thisMonth'));
+
+            // Total Bazar
+            $totalBazar = Bazar::whereMonth('date', $currentMonth)
+                ->sum('amount');
+
+            // Meal Rate
+            $mealRate = $monthMeals > 0 ? round($totalBazar / $monthMeals, 2) : 0;
+            $mealBill = $mealRate * $monthMeals;
+
+            //total Received Amount
+            $paid = Payment::whereMonth('date', $currentMonth)
+                ->sum('amount');
+            //total Due
+            $month = now()->format('Y-m');
+
+            $billDue = Bill::where('month', $month)->get()
+                ->sum(function ($item) {
+                    $users = User::count();
+                    return $item->total + ($item->seat_rent * $users);
+                });
+
+            return view('manager.dashboard', compact('user', 'meals', 'monthMeals', 'thisMonth', 'paid', 'billDue', 'mealBill'));
 
 
             /** Member Dashboard Meal, Bazar Detels Show*/
         } elseif (Auth::check() && Auth::user()->role == 'member') {
-            $currentMonth = Carbon::now()->month;
-            /** My Meal Show */
-            $user = auth()->user();
-            $meals = $user->meals()->whereMonth('date',  $currentMonth)
-                ->orderBy('date', 'DESC')
-                ->get();
-            $totalMeals = $meals->sum(function ($m) {
-                return $m->breakfast + $m->lunch + $m->dinner;
-            });
-
-
-            // All User total meals with Meal Rate 
-            $allMeals = Meal::whereMonth('date', $currentMonth)->get();
-            $allTotalMeals = $allMeals->sum(fn($m) => $m->breakfast + $m->lunch + $m->dinner);
-            // Total Bazar full this month
-            $totalBazar = Bazar::whereMonth('date', $currentMonth)->sum('amount');
-            // Meal Rate All user Same
-            $mealRate = $allTotalMeals > 0 ? round($totalBazar / $allTotalMeals, 2) : 0;
-
-            $mealCost = $totalMeals * $mealRate;
-            return view('members.dashboard', compact('meals', 'totalMeals', 'mealRate', 'mealCost'));
+            return view('members.dashboard');
 
 
             /** Account Dashboard Meal, Bazar Detels Show*/
@@ -170,5 +176,65 @@ class UserController extends Controller
             "photo"   => $photo,
         ]);
         return back()->with("success", "Profile updated successfully!");
+    }
+
+    /**
+     * Forget Password
+     */
+    public function forgetPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+        //Check This email
+        $userEmail = User::where('email', $request->email)->first();
+
+        if (!$userEmail) {
+            return back()->withErrors([
+                'email' => 'The Email User not Found',
+            ]);
+        }
+        $userEmail->active_token = Str::random(40);
+        $userEmail->otp = rand(100000, 999999);
+        $userEmail->save();
+        $userEmail->notify(new UserOtpSend($userEmail));
+        return back()->with('success', 'Check Your Email, Reset your Password');
+    }
+
+    /**
+     * Reset Password Form Show
+     */
+    public function resetPasswordForm($token)
+    {
+        return view('reset-password', compact('token'));
+    }
+
+    /**
+     * Reset Password
+     */
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'otp'       => 'required',
+            "password"  => "required|confirmed",
+        ]);
+        //check otp
+        $checkOtp = User::where('otp', $request->otp)->first();
+        if (!$checkOtp) {
+            return back()->withErrors([
+                'otp' => 'OTP not Matched',
+            ]);
+        }
+        $checkOtp->password = Hash::make($request->password);
+        $checkOtp->otp = null;
+        $checkOtp->active_token = null;
+        $checkOtp->save();
+        return redirect()->route('login')->with('success', 'Password Reset Successfull!');
+    }
+
+
+    public function paymentShow()
+    {
+        return view();
     }
 }

@@ -90,9 +90,6 @@ class BazarController extends Controller
             'amount'        => $request->amount,
             'money_recipt'  => $money_recipt,
         ]);
-
-
-
         return redirect()->route('bazar.view')->with('success', 'Bazar updated successfully!');
     }
 }

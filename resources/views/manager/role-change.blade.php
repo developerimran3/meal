@@ -3,14 +3,9 @@
     <div class="page-wrapper">
         <div class="page-content">
             <div class="row">
-                <div class="col-xl-9"></div>
-                <div class="col-xl-3">
-                    @include('layouts.components.message')
-                </div>
-                <br>
-                <hr />
-                <br>
-                <br>
+
+
+
                 <div class="col-lg-5 ">
                     <div class="card border-top border-0 border-4 border-primary">
                         <div class="card-body">

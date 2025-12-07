@@ -9,9 +9,9 @@
                             <div class="d-flex align-items-center mb-4">
                                 <div>
                                     <p class="text-black">My Total Meal</p>
-                                    <h5 class="text-primary">0</h5>
+                                    <h5 class="text-black">0</h5>
                                 </div>
-                                <div class="ms-auto text-primary"><i class='bx bx-restaurant font-30'></i>
+                                <div class="ms-auto text-black"><i class='bx bx-restaurant font-30'></i>
                                 </div>
                             </div>
                         </div>
@@ -24,9 +24,9 @@
                             <div class="d-flex align-items-center mb-4">
                                 <div>
                                     <p class="text-black">Meals Rate</p>
-                                    <h5 class="text-primary">TK. 60.00</h5>
+                                    <h5 class="text-black">TK. 60.00</h5>
                                 </div>
-                                <div class="ms-auto text-primary"><i class='bx bx-bulb font-30'></i>
+                                <div class="ms-auto text-black"><i class='bx bx-bulb font-30'></i>
                                 </div>
                             </div>
 
@@ -39,9 +39,9 @@
                             <div class="d-flex align-items-center mb-4">
                                 <div>
                                     <p class="text-black">Total Amount</p>
-                                    <h5 class="text-primary">TK. 869.00</h5>
+                                    <h5 class="text-black">TK. 869.00</h5>
                                 </div>
-                                <div class="ms-auto text-primary"><i class='bx bx-chat font-30'></i>
+                                <div class="ms-auto text-black"><i class='bx bx-chat font-30'></i>
                                 </div>
                             </div>
                         </div>
@@ -53,9 +53,9 @@
                             <div class="d-flex align-items-center mb-4">
                                 <div>
                                     <p class="text-black">Total Payments</p>
-                                    <h5 class="text-primary">TK. 869.00</h5>
+                                    <h5 class="text-black">TK. 869.00</h5>
                                 </div>
-                                <div class="ms-auto text-primary"><i class='bx bx-chat font-30'></i>
+                                <div class="ms-auto text-black"><i class='bx bx-chat font-30'></i>
                                 </div>
                             </div>
                         </div>

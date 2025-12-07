@@ -3,13 +3,7 @@
     <div class="page-wrapper">
         <div class="page-content">
             <div class="row">
-                <div class="col-lg-4">
-                </div>
-                <div class="col-lg-3">
-                    @include('layouts.components.message')
-                </div>
-                <div class="col-lg-5">
-                </div>
+
                 <br>
                 <div class="col-lg-5">
                     <div class="card">
@@ -65,8 +59,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-1"></div>
-                <div class="col-lg-6">
+
+                <div class="col-lg-7">
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">

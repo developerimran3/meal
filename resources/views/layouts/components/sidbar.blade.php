@@ -45,6 +45,13 @@
                     <div class="menu-title">Bill Create</div>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('payment.index') }}">
+                    <div class="parent-icon"><i class='bx bx-dollar-circle'></i>
+                    </div>
+                    <div class="menu-title">Deu Payments</div>
+                </a>
+            </li>
         @endif
 
         @if (Auth::user()->role == 'manager')
@@ -84,14 +91,9 @@
                 </a>
             </li>
         @endif
+
+
         @if (Auth::user()->role == 'accountant')
-            <li>
-                <a href="#">
-                    <div class="parent-icon"><i class='bx bx-dollar-circle'></i>
-                    </div>
-                    <div class="menu-title">Deu Payments</div>
-                </a>
-            </li>
             <li>
                 <a href="#">
                     <div class="parent-icon"><i class='bx bx-credit-card-front'></i>

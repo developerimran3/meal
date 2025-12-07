@@ -2,95 +2,109 @@
 @section('main')
     <div class="page-wrapper">
         <div class="page-content">
-            @if (in_array(Auth::user()->role, ['manager', 'operations', 'accountant']))
-                <div class="row row-cols-1 row-cols-lg-6">
-                    <div class="col">
-                        <div class="card radius-10 overflow-hidden ">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-4">
-                                    <div>
-                                        <p class="text-black">My Total Meal</p>
-                                        <h5 class="text-primary">Total: {{ $totalMeals }} meals</h5>
-                                    </div>
-                                    <div class="ms-auto text-primary"><i class='bx bx-restaurant font-30'></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card radius-10 overflow-hidden">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-4">
-                                    <div>
-                                        <p class="text-black">Meal Rate</p>
-                                        <h5 class="text-primary">Tk. {{ $mealRate }}</h5>
-                                    </div>
-                                    <div class="ms-auto text-primary"><i class='bx bx-bulb font-30'></i>
-                                    </div>
-                                </div>
 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card radius-10 overflow-hidden">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-4">
-                                    <div>
-                                        <p class="text-black">Total Amount</p>
-                                        <h5 class="text-primary">TK. {{ $mealCost }}</h5>
-                                    </div>
-                                    <div class="ms-auto text-primary"><i class='bx bx-chat font-30'></i>
-                                    </div>
+            <div class="row row-cols-1 row-cols-lg-4">
+                <div class="col">
+                    <div class="card radius-10 overflow-hidden ">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <p class="text-black">My Total Meal</p>
+                                    <h5 class="text-black"> {{ $totalMeals ?? 0 }}</h5>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card radius-10 overflow-hidden">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-4">
-                                    <div>
-                                        <p class="text-black">Others Bill</p>
-                                        <h5 class="text-primary">TK. {{ $otherBills }}</h5>
-                                    </div>
-                                    <div class="ms-auto text-primary"><i class='bx bx-chat font-30'></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card radius-10 overflow-hidden">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-4">
-                                    <div>
-                                        <p class="text-black">Total Bill + Other Bill</p>
-                                        <h5 class="text-primary">TK. {{ $mealCost + $otherBills }}</h5>
-                                    </div>
-                                    <div class="ms-auto text-primary"><i class='bx bx-chat font-30'></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card radius-10 overflow-hidden">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center mb-4">
-                                    <div>
-                                        <p class="text-black">Total Payments</p>
-                                        <h5 class="text-primary">TK. 869.00</h5>
-                                    </div>
-                                    <div class="ms-auto text-primary"><i class='bx bx-chat font-30'></i>
-                                    </div>
+                                <div class="ms-auto text-black"><i class='bx bx-restaurant font-30'></i>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            @endif
+                <div class="col">
+                    <div class="card radius-10 overflow-hidden">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <p class="text-black">Meal Rate</p>
+                                    <h5 class="text-black">Tk. {{ $mealRate ?? 0 }}</h5>
+                                </div>
+                                <div class="ms-auto text-black"><i class='bx bx-bulb font-30'></i>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card radius-10 overflow-hidden">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <p class="text-black">Total Meals Amount</p>
+                                    <h5 class="text-black">TK. {{ $mealCost ?? 0 }}</h5>
+                                </div>
+                                <div class="ms-auto text-black"><i class='bx bx-chat font-30'></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card radius-10 overflow-hidden">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <p class="text-black">Others Bill</p>
+                                    <h5 class="text-black">TK. {{ $otherBills + $seatBill ?? 0 }}</h5>
+                                </div>
+                                <div class="ms-auto text-black"><i class='bx bx-chat font-30'></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card radius-10 overflow-hidden">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <p class="text-black">Total Bill</p>
+                                    <h5 class="text-black">TK. {{ $mealCost + $otherBills + $seatBill ?? 0 }}</h5>
+                                </div>
+                                <div class="ms-auto text-black"><i class='bx bx-chat font-30'></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card radius-10 overflow-hidden">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <p class="text-black">Total Paid Payments</p>
+                                    <h5 class="text-black">Tk. {{ $paid ?? 0 }}</h5>
+                                </div>
+                                <div class="ms-auto text-black"><i class='bx bx-chat font-30'></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card radius-10 overflow-hidden">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <p class="text-black">Total Due</p>
+                                    <h5 class="text-danger">Tk. {{ $mealCost + $otherBills + $seatBill - $paid ?? 0 }}</h5>
+                                </div>
+                                <div class="ms-auto text-black"><i class='bx bx-chat font-30'></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {{-- Meals --}}
             <div class="row">
                 <div class="col-lg-6">
@@ -99,7 +113,6 @@
                             <h6 class="text-primary">Your Daily Meal Entry</h6>
                             <hr>
                             <br>
-                            @include('layouts.components.message')
                             <form action="{{ route('meal.store') }}" method="POST">
                                 @csrf
                                 <div class="row mb-3">
@@ -170,15 +183,15 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tr class="customs-table text-center ">
+                                <tr class="text-center">
                                     <th>
-                                        <h4 class="text-primary m-0">Total = </h4>
+                                        <h4>Total = </h4>
                                     </th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
                                     <th>
-                                        <h4 class="text-primary m-0"> {{ $totalMeals }}</h4>
+                                        <h4> {{ $totalMeals }}</h4>
                                     </th>
                                 </tr>
                             </table>

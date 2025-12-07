@@ -5,6 +5,7 @@
 <!-- Mirrored from codervent.com/synadmin/demo/vertical/authentication-forgot-password.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Jun 2021 11:05:18 GMT -->
 
 <head>
+    @include('layouts.components.main-header')
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
     <link href="assets/css/app.css" rel="stylesheet">
     <link href="assets/css/icons.css" rel="stylesheet">
-    <title>Synadmin – Bootstrap5 Admin Template</title>
+    <title>User – Forget Password</title>
 </head>
 
 <body>
@@ -34,15 +35,21 @@
                         </div>
                         <h4 class="mt-5 font-weight-bold">Forgot Password?</h4>
                         <p class="text-muted">Enter your registered email ID to reset the password</p>
-                        <div class="my-4">
-                            <label class="form-label">Email id</label>
-                            <input type="text" class="form-control form-control-lg" placeholder="example@user.com" />
-                        </div>
-                        <div class="d-grid gap-2">
-                            <button type="button" class="btn btn-primary btn-lg">Send</button> <a
-                                href="{{ route('loginView') }}" class="btn btn-white btn-lg"><i
-                                    class='bx bx-arrow-back me-1'></i>Back to Login</a>
-                        </div>
+
+                        <form action="{{ route('forget.password') }}" method="POST">
+                            @csrf
+                            <div class="my-4">
+                                <label class="form-label">Email Address</label>
+                                <input type="text" name="email" class="form-control form-control-lg"
+                                    placeholder="example@user.com" />
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">Send</button>
+
+                                <a href="{{ route('loginView') }}" class="btn btn-white btn-lg"><i
+                                        class='bx bx-arrow-back me-1'></i>Back to Login</a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -51,7 +58,6 @@
     <!-- end wrapper -->
 </body>
 
-
-<!-- Mirrored from codervent.com/synadmin/demo/vertical/authentication-forgot-password.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Jun 2021 11:05:19 GMT -->
+<script src="assets/js/bootstrap.bundle.min.js"></script>
 
 </html>

@@ -15,10 +15,8 @@ class Meal extends Model
     }
 
 
-    // public function totalMeals()
-    // {
-    //     return $this->breakfast + $this->lunch + $this->dinner;
-    // }
-
-
+    public function totalMeals()
+    {
+        return $this->breakfast + $this->lunch + $this->dinner;
+    }
 }

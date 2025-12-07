@@ -8,47 +8,64 @@ use Illuminate\Http\Request;
 
 class BillController extends Controller
 {
-    public function index()
+    public function index($month = null)
     {
-        $bills = Bill::all();
-        return view('bill.create', compact('bills'));
+        $bill = $month ? Bill::where('month', $month)->first() : null;
+        $allBills = Bill::orderBy('month', 'DESC')->get();
+
+        return view('bill.create', compact('bill', 'allBills'));
     }
+
 
     public function storeBill(Request $request)
     {
         $request->validate([
             'month'         => 'required',
             'seat_rent'     => 'required|numeric',
-            'wifi'          => 'required|numeric',
-            'khala'         => 'required|numeric',
         ]);
-
         // per month 1 Bill Create
         if (Bill::where('month', $request->month)->exists()) {
-            return back()->withErrors(['You already added This Month\'s Bill. You cannot add more than once!']);
+            return back()->with('error', 'You already added This Month\'s Bill. You cannot add more than once!');
         }
-        $total = $request->seat_rent + $request->wifi + $request->khala + $request->utility_bill;
         Bill::create([
             'month'         => $request->month,
             'seat_rent'     => $request->seat_rent,
             'wifi'          => $request->wifi,
             'khala'         => $request->khala,
             'utility_bill'  => $request->utility_bill,
-            'total'         => $total
+            'total'         => $request->wifi + $request->khala + $request->utility_bill,
         ]);
-
         return back()->with('success', 'Bill Create Successfull!');
     }
 
-    public function calculate($month)
+
+    public function updateBill(Request $request, $id)
     {
-        $users = User::count();
-        $bill = Bill::where('month', $month)->first();
+        $bill = Bill::findOrFail($id);
 
-        if (!$bill) return "No bill found";
+        $request->validate([
+            'month'         => 'required',
+            'seat_rent'     => 'required|numeric',
+        ]);
 
-        $otherBills = ($bill->wifi + $bill->khala + $bill->utility) / $users;
+        $bill->update([
+            'month'         => $request->month,
+            'seat_rent'     => $request->seat_rent,
+            'wifi'          => $request->wifi,
+            'khala'         => $request->khala,
+            'utility_bill'  => $request->utility_bill,
+            'total'         => $request->wifi + $request->khala + $request->utility_bill,
+        ]);
 
-        return $otherBills;
+        return redirect()->route('bill.index')->with('success', 'Bill updated successfully!');
+    }
+
+
+
+    public function billDelete($id)
+    {
+        $bill = Bill::findOrFail($id);
+        $bill->delete();
+        return back()->with('success', 'Bill Delete Successfull!');
     }
 }

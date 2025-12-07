@@ -7,6 +7,7 @@ use App\Models\Bill;
 use App\Models\Meal;
 use App\Models\User;
 use App\Models\Bazar;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,47 +16,59 @@ class MealController extends Controller
     /**
      * Meal Show in Meal create Page
      */
+
+
     public function index()
     {
         $user = auth()->user();
         $currentMonth = now()->month;
-        // one user see har all total meals
+        $month = now()->format('Y-m');
+
+        // One user meals
         $meals = $user->meals()
             ->whereMonth('date', $currentMonth)
             ->orderBy('date', 'DESC')
             ->get();
-        // User own total meals
+
+        // User total meals
         $totalMeals = $meals->sum(fn($m) => $m->breakfast + $m->lunch + $m->dinner);
 
-
-        // All User total meals with Meal Rate 
+        // All users total meals
         $allMeals = Meal::whereMonth('date', $currentMonth)->get();
         $allTotalMeals = $allMeals->sum(fn($m) => $m->breakfast + $m->lunch + $m->dinner);
-        // Total Bazar full this month
+
+
+        // Total Bazar
         $totalBazar = Bazar::whereMonth('date', $currentMonth)->sum('amount');
-        // Meal Rate All user Same
+
+        // Meal rate
         $mealRate = $allTotalMeals > 0 ? round($totalBazar / $allTotalMeals, 2) : 0;
-        $mealCost = $totalMeals * $mealRate;
 
+        // Meal cost (rounded)
+        $mealCost = round($totalMeals * $mealRate, 2);
 
-        $currentMonth = now()->format('Y-m');
+        // Others Bill
+        $users = User::count();
+        $bill = Bill::where('month', $month)->first();
 
-        $bill = Bill::where('month', $currentMonth)->first();
+        $otherBills = 0;
+        $seatBill = 0;
 
-        $otherBills = $bill->total / $user->count();
+        if ($bill) {
+            $seatBill = $bill->seat_rent;
+            $bills = $bill->wifi + $bill->khala + $bill->utility_bill;
 
+            if ($users > 0 && $bills > 0) {
+                $otherBills = round($bills / $users, 2);
+            }
+        }
+        $paid = Payment::where('user_id', $user->id)
+            ->whereMonth('date', $currentMonth)
+            ->sum('amount');
 
-        // $otherBills = $payments->whereIn('type', ['rent', 'wifi', 'khala'])->sum('amount'); // payments recorded as bills
-
-        // $paid = $payments->sum('amount');
-
-        // $totalBill = $mealCost + $otherBills;
-        // $due = $totalBill - $paid;
-
-        // return view('member.dashboard', compact('meals', 'payments', 'totalMeals', 'mealRate', 'mealCost', 'otherBills', 'paid', 'due'));
-
-        return view('meals.meal-create', compact('meals', 'totalMeals', 'mealRate', 'mealCost', 'otherBills'));
+        return view('meals.meal-create', compact('meals', 'totalMeals', 'mealRate', 'mealCost', 'otherBills', 'seatBill', 'paid'));
     }
+
     /** 
      * Meal Create 
      */
@@ -75,7 +88,7 @@ class MealController extends Controller
             ->whereDate('date', $today)
             ->exists();
         if ($already) {
-            return back()->withErrors(['You already added today\'s meal. You cannot add more than once!']);
+            return back()->with('error', 'You already added today\'s meal. You cannot add more than once!');
         }
         //Meal Store with Database
         Meal::create([

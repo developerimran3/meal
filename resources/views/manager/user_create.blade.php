@@ -12,9 +12,6 @@
                                     </div>
                                     <h5 class="mb-0 text-primary">Add New User</h5>
                                 </div>
-                                <div class="col-xl-12">
-                                    @include('layouts.components.message')
-                                </div>
                                 <hr />
                                 <form action="{{ route('user.create') }}" method="POST">
                                     @csrf

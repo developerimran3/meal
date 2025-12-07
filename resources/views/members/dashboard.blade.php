@@ -2,7 +2,7 @@
 @section('main')
     <div class="page-wrapper">
         <div class="page-content">
-            <div class="row row-cols-1 row-cols-lg-4">
+            {{-- <div class="row row-cols-1 row-cols-lg-4">
                 <div class="col">
                     <div class="card radius-10 overflow-hidden ">
                         <div class="card-body">
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection

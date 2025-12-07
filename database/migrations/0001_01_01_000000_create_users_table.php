@@ -25,6 +25,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(false);
             $table->string('active_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('otp')->nullable();
             $table->enum('status', ['active', 'pandding'])->default('active');
             $table->boolean('trash')->default(false);
             $table->rememberToken();

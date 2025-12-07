@@ -6,7 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BazarController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\ManagerController;
-
+use App\Http\Controllers\PaymentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,12 +15,20 @@ Route::get('/forget-password', function () {
     return view('forget-password');
 });
 
+
 //login and Log Out
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::post('/forget-password', [UserController::class, 'forgetPassword'])->name('forget.password');
+
+Route::get('/reset-password/{token}', [UserController::class, 'resetPasswordForm'])->name('reset.password.form');
+
+Route::post('/reset-password', [UserController::class, 'resetPassword'])->name('reset.password');
+
+
+
 // Meals Show
-
-
 Route::middleware(['logedin'])->group(function () {
     Route::get('/login', [UserController::class, 'loginView'])->name('loginView');
 });
@@ -31,16 +39,9 @@ Route::middleware(['loginView'])->group(function () {
     Route::post('/dashboard/update', [UserController::class, 'update'])->name('update');
     Route::get('/dashboard/meals', [MealController::class, 'index'])->name('index');
     Route::post('/dashboard/meals/store', [MealController::class, 'store'])->name('meal.store');
-    Route::get('/dashboard/meals/today', [MealController::class, 'todayMeals'])->name('meals.today');
-    Route::delete('/dashboard/meals/delete/{id}', [MealController::class, 'deleteMeal'])->name('meal.delete');
-    Route::get('/dashboard/meals/search', [MealController::class, 'mealSearch'])->name('meals.search');
-    Route::get('/dashboard/bill', [BillController::class, 'index'])->name('bill.index');
-    Route::post('/dashboard/bill/store', [BillController::class, 'storeBill'])->name('bill.store');
 });
 
-
-
-Route::middleware(['auth', 'role:operations'])->group(function () {
+Route::middleware(['role:operations'])->group(function () {
     Route::get('/dashboard/bazar/{id?}', [BazarController::class, 'viewBazar'])->name('bazar.view');
     Route::post('/dashboard/bazar', [BazarController::class, 'storeBazar'])->name('bazar.store');
     Route::get('/dashboard/bazar/show/{id}', [BazarController::class, 'showRecipt'])->name('bazar.show');
@@ -59,8 +60,23 @@ Route::middleware(['role:manager'])->group(function () {
 });
 
 
-Route::middleware(['auth', 'role:accountant'])->group(function () {
-    // Route::get('/accountant/dashboard', [AccountantController::class, 'index'])->name('accountant.dashboard');
-    // Route::post('/accountant/payment', [AccountantController::class, 'storePayment'])->name('accountant.payment.store');
-    // Route::post('/accountant/expense', [AccountantController::class, 'storeExpense'])->name('accountant.expense.store');
+Route::middleware(['auth', 'role:manager|accountant'])->group(function () {
+
+    Route::get('/dashboard/bill/{month?}', [BillController::class, 'index'])->name('bill.index');
+    Route::post('/dashboard/bill/store', [BillController::class, 'storeBill'])->name('bill.store');
+    Route::put('/dashboard/bill/update/{id}', [BillController::class, 'updateBill'])->name('bill.update');
+    Route::delete('/dashboard/bill/delete/{id}', [BillController::class, 'billDelete'])->name('bill.delete');
+
+
+    Route::get('/dashboard/payment', [PaymentController::class, 'payment'])->name('payment.index');
+    Route::post('/dashboard/payment/store', [PaymentController::class, 'makePayment'])->name('payment.store');
+    Route::get('/dashboard/payment/edit/{id}', [PaymentController::class, 'paymentEdit'])->name('payment.edit');
+    Route::post('/dashboard/payment/update/{id}', [PaymentController::class, 'paymentupdate'])->name('payment.update');
+});
+
+Route::middleware(['auth', 'role:manager|operations'])->group(function () {
+
+    Route::get('/dashboard/meals/today', [MealController::class, 'todayMeals'])->name('meals.today');
+    Route::delete('/dashboard/meals/delete/{id}', [MealController::class, 'deleteMeal'])->name('meal.delete');
+    Route::get('/dashboard/meals/search', [MealController::class, 'mealSearch'])->name('meals.search');
 });

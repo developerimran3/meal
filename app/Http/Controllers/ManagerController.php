@@ -79,14 +79,12 @@ class ManagerController extends Controller
     }
 
     /**
-     * Role Management Change
+     * Role Management Change Seat
      */
     public function changeSet(Request $request)
     {
-
         $request->validate([
             'user_id'   => 'required',
-
             'set_no'    => 'required|unique:users,set_no|in:1,2,3,4,5,6,7,8,9,10',
         ]);
         // Update Role And Set No
