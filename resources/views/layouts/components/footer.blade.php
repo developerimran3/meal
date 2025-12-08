@@ -27,9 +27,7 @@
     $(document).ready(function() {
         // Toastr Options
         toastr.options = {
-            "closeButton": true,
-            "progressBar": true,
-            "timeOut": "4000",
+            "timeOut": "3000",
             "positionClass": "toast-top-right"
         };
 

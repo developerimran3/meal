@@ -42,8 +42,8 @@ class UserOtpSend extends Notification
     {
         return (new MailMessage)
             ->greeting('Hello:'  . ' ' . $this->name)
-            ->line('Your OTP:' . ' ' . $this->otp)
-            ->line('Please Change 1 Min')
+            ->line('Your OTP Is:' . ' ' . $this->otp)
+            ->line('This OTP is valid for only 1 minute. Please reset your password within this time.')
             ->action('Reset Your Password Link', url('/reset-password/'  . $this->active_token))
             ->line('Thank you for using our application!');
     }

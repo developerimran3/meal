@@ -25,17 +25,27 @@ class UserController extends Controller
      */
     public function login(Request $request)
     {
-        $credential = $request->validate([
-            'email'    => 'required|email|exists:users',
+        $credentials = $request->validate([
+            'auth'     => 'required',
             'password' => 'required',
         ]);
-        // Authentication logic goes here
-        if (Auth::attempt($credential)) {
-            return redirect()->route('dashboard')->with('success', 'Login Successfull!');
+        //Check login var Email/phone/username
+        if (filter_var($credentials['auth'], FILTER_VALIDATE_EMAIL)) {
+            $credentials['email'] = $request->auth;
+            unset($credentials['auth']);
+        } else if (preg_match('/^[0-9]{11}$/', $credentials['auth'])) {
+            $credentials['phone'] = $request->auth;
+            unset($credentials['auth']);
+        } else {
+            $credentials['username'] = $request->auth;
+            unset($credentials['auth']);
         }
-        return back()->withErrors([
-            'password' => 'The password is incorrect.',
-        ]);
+        //Authentication logic goes here
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('dashboard')->with('success', 'User Login Successfull!');
+        }
+
+        return back()->with('error', 'The password is incorrect.');
     }
     /**
      * User Logout
@@ -203,6 +213,7 @@ class UserController extends Controller
         if (!$userEmail) {
             return back()->withErrors([
                 'email' => 'The Email User not Found',
+
             ]);
         }
         $userEmail->active_token = Str::random(40);

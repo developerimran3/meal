@@ -7,10 +7,6 @@
     <title>Meal Managenment System</title>
 </head>
 
-
-
-
-
 <body>
     <!--wrapper-->
     <div class="wrapper">
