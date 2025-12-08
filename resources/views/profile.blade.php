@@ -130,22 +130,25 @@
                                     <h5 class="card-title">Change Password</h5>
                                 </div>
                                 <div class="card-body">
-                                    <form action="#" method="get">
+                                    <form action="{{ route('password.update') }}" method="POST">
+                                        @csrf
                                         <div class="form-group my-2">
                                             <label for="current_password" class="form-label">Current Password</label>
                                             <input type="password" name="current_password" id="current_password"
-                                                class="form-control" placeholder="Enter your current password"
-                                                value="1L0V3Indonesia">
+                                                class="form-control" placeholder="Enter your current password">
                                         </div>
+
                                         <div class="form-group my-2">
                                             <label for="password" class="form-label">New Password</label>
                                             <input type="password" name="password" id="password" class="form-control"
-                                                placeholder="Enter new password" value="">
+                                                placeholder="Enter new password">
                                         </div>
+
                                         <div class="form-group my-2">
-                                            <label for="confirm_password" class="form-label">Confirm Password</label>
-                                            <input type="password" name="confirm_password" id="confirm_password"
-                                                class="form-control" placeholder="Enter confirm password" value="">
+                                            <label for="password_confirmation" class="form-label">Confirm Password</label>
+                                            <input type="password" name="password_confirmation"
+                                                id="password_confirmation" class="form-control"
+                                                placeholder="Enter confirm password">
                                         </div>
 
                                         <div class="form-group my-2 d-flex justify-content-end">
@@ -154,6 +157,7 @@
                                             </button>
                                         </div>
                                     </form>
+
                                 </div>
                             </div>
                         </div>

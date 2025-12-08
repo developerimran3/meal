@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Carbon\Carbon;
 use App\Models\Bill;
 use App\Models\Meal;
@@ -101,8 +102,7 @@ class PaymentController extends Controller
                 'due'        => $due,
             ];
         });
-        $payment = Payment::whereMonth('date', Carbon::parse($month)->month)
-            ->orderBy('created_at', 'DESC')
+        $payment = Payment::orderBy('updated_at', 'DESC')
             ->get();
         return view('payment.create', compact('overview', 'month', 'payment'));
     }
@@ -135,5 +135,24 @@ class PaymentController extends Controller
         ]);
 
         return redirect()->route('payment.index')->with('success', 'Payment Updated Successfully');
+    }
+
+
+    public function paymentHistory()
+    {
+        $user = auth()->id();
+
+        $paymentHistoryMonth = Payment::where('user_id', $user)
+            ->whereMonth('date', now()->month)
+
+            ->latest()
+            ->get();
+
+        $paymentHistoryYears = Payment::where('user_id', $user)
+            ->whereYear('date', now()->year)
+            ->latest()
+            ->get();
+
+        return view('payment.history', compact('paymentHistoryMonth', 'paymentHistoryYears'));
     }
 }

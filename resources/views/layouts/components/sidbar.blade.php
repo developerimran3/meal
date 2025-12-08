@@ -93,31 +93,14 @@
         @endif
 
 
-        @if (Auth::user()->role == 'accountant')
-            <li>
-                <a href="#">
-                    <div class="parent-icon"><i class='bx bx-credit-card-front'></i>
-                    </div>
-                    <div class="menu-title">Finance Report</div>
-                </a>
-            </li>
-        @endif
-        @if (Auth::user()->role == 'member')
-            <li>
-                <a href="#">
-                    <div class="parent-icon"><i class='bx bx-home'></i>
-                    </div>
-                    <div class="menu-title">Bills & Payments</div>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <div class="parent-icon"><i class='bx bx-home'></i>
-                    </div>
-                    <div class="menu-title">Payments History</div>
-                </a>
-            </li>
-        @endif
+        <li>
+            <a href="{{ route('payment.history') }}">
+                <div class="parent-icon"><i class='bx bx-credit-card-front'></i>
+                </div>
+                <div class="menu-title">Payments History</div>
+            </a>
+        </li>
+
         @if (Auth::user()->role == 'operations')
             <li>
                 <a href="{{ route('bazar.view') }}">

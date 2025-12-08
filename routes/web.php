@@ -19,12 +19,9 @@ Route::get('/forget-password', function () {
 //login and Log Out
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-
-Route::post('/forget-password', [UserController::class, 'forgetPassword'])->name('forget.password');
-
-Route::get('/reset-password/{token}', [UserController::class, 'resetPasswordForm'])->name('reset.password.form');
-
-Route::post('/reset-password', [UserController::class, 'resetPassword'])->name('reset.password');
+Route::post('/forget/password', [UserController::class, 'forgetPassword'])->name('forget.password');
+Route::get('/reset/password/{token}', [UserController::class, 'resetPasswordForm'])->name('reset.password.form');
+Route::post('/reset/password', [UserController::class, 'resetPassword'])->name('reset.password');
 
 
 
@@ -39,6 +36,8 @@ Route::middleware(['loginView'])->group(function () {
     Route::post('/dashboard/update', [UserController::class, 'update'])->name('update');
     Route::get('/dashboard/meals', [MealController::class, 'index'])->name('index');
     Route::post('/dashboard/meals/store', [MealController::class, 'store'])->name('meal.store');
+    Route::post('/dashboard/update/password', [UserController::class, 'updatePassword'])->name('password.update');
+    Route::get('/dashboard/payment/history', [PaymentController::class, 'paymentHistory'])->name('payment.history');
 });
 
 Route::middleware(['role:operations'])->group(function () {
@@ -51,11 +50,11 @@ Route::middleware(['role:operations'])->group(function () {
 
 // Manager Routes (Role Based)
 Route::middleware(['role:manager'])->group(function () {
-    Route::get('/dashboard/update-role', [ManagerController::class, 'changeRole'])->name('user.change.role');
-    Route::post('/dashboard/update-set', [ManagerController::class, 'changeSet'])->name('user.change.set');
-    Route::post('/dashboard/update-role', [ManagerController::class, 'changeRoleUpdate'])->name('changeRoleUpdate');
-    Route::get('/dashboard/user-create', [ManagerController::class, 'userCreateShow'])->name('user.create.show');
-    Route::post('/dashboard/user-create', [ManagerController::class, 'userCreate'])->name('user.create');
+    Route::get('/dashboard/update/role', [ManagerController::class, 'changeRole'])->name('user.change.role');
+    Route::post('/dashboard/update/set', [ManagerController::class, 'changeSet'])->name('user.change.set');
+    Route::post('/dashboard/update/role', [ManagerController::class, 'changeRoleUpdate'])->name('changeRoleUpdate');
+    Route::get('/dashboard/user/create', [ManagerController::class, 'userCreateShow'])->name('user.create.show');
+    Route::post('/dashboard/user/create', [ManagerController::class, 'userCreate'])->name('user.create');
     Route::delete('/dashboard/delete/{id}', [ManagerController::class, 'deleteUser'])->name('user.delete');
 });
 

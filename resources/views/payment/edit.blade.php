@@ -18,7 +18,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label>Amount</label>
-                                    <input type="number" name="amount" class="form-control"
+                                    <input type="number" name="amount" step="0.01" class="form-control"
                                         value="{{ $payEdit->amount }}">
                                 </div>
                                 <div class="mb-3">

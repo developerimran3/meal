@@ -135,15 +135,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Show Password Reset Page
-     */
-    public function profileSetting()
-    {
-        if (Auth::user()->role) {
-            return view('setting');
-        }
-    }
 
     /**
      * User Data Update
@@ -176,6 +167,26 @@ class UserController extends Controller
             "photo"   => $photo,
         ]);
         return back()->with("success", "Profile updated successfully!");
+    }
+    /**
+     * User Password Change/Update
+     */
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'password'         => 'required|min:6|confirmed',
+        ]);
+        // Check current password
+        if (!Hash::check($request->current_password, auth()->user()->password)) {
+            return back()->with('error', 'Current password does not match.');
+        }
+        // Update new password
+        auth()->user()->update([
+            'password' => Hash::make($request->password),
+        ]);
+
+        return back()->with('success', 'Password updated successfully.');
     }
 
     /**
@@ -230,11 +241,5 @@ class UserController extends Controller
         $checkOtp->active_token = null;
         $checkOtp->save();
         return redirect()->route('login')->with('success', 'Password Reset Successfull!');
-    }
-
-
-    public function paymentShow()
-    {
-        return view();
     }
 }

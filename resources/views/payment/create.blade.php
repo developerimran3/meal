@@ -99,7 +99,8 @@
                                         <h6 class="mb-0">Amount</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="number" name="amount" class="form-control" placeholder="Amount">
+                                        <input type="number" name="amount" step="0.01" class="form-control"
+                                            placeholder="Amount">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
