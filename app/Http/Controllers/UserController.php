@@ -8,6 +8,7 @@ use App\Models\Meal;
 use App\Models\User;
 use App\Models\Bazar;
 use App\Models\Payment;
+use App\Notifications\UserActive;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Notifications\UserOtpSend;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function loginView()
+    public function loginForm()
     {
         return view('login');
     }
@@ -41,19 +42,67 @@ class UserController extends Controller
             unset($credentials['auth']);
         }
         //Authentication logic goes here
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('dashboard')->with('success', 'User Login Successfull!');
-        }
 
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            if ($user->is_active == true) {
+                return redirect()->route('dashboard')->with('success', 'User Login Successful!');
+            }
+            return redirect()->route('active.profile.form')->with('error', 'User Not Acitvation.');
+        }
         return back()->with('error', 'The password is incorrect.');
     }
+
+    /**
+     * Active Profile
+     */
+
+
+    public function activeProfileForm()
+    {
+        return view('active_profile');
+    }
+
+    public function activeProfile(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+        // Get User by ID
+        $user = Auth::user();
+        // Email Check
+        if ($user->email !== $request->email) {
+            return back()->with('error', 'Email does not match our records.');
+        }
+        $user->active_token = Str::random(40);
+        $user->save();
+        $user->notify(new UserActive($user));
+        return back()->with('success', 'Profile Activated Link Send Your Email.');
+    }
+
+    public function activeSuccess($token)
+    {
+        $activeToken = User::where('active_token', $token)->first();
+        if (!$activeToken) {
+            return "Invalid Activation Token";
+        }
+        $activeToken->is_active = true;
+        $activeToken->active_token = null;
+        $activeToken->email_verified_at = now();
+        $activeToken->save();
+        return redirect('/dashboard')->with('success', 'Your Actived Successfull!');
+    }
+
+
+
+
     /**
      * User Logout
      */
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect()->route('loginView')->with('success', 'Log Out Successfull!');
+        return redirect()->route('login.form')->with('success', 'Log out Successfull!');
     }
 
     /**
@@ -74,7 +123,6 @@ class UserController extends Controller
             $monthMeals = $meals->sum(function ($m) {
                 return $m->breakfast + $m->lunch + $m->dinner;
             });
-
             // Total Bazar
             $totalBazar = Bazar::whereMonth('date', $currentMonth)
                 ->sum('amount');
@@ -96,7 +144,6 @@ class UserController extends Controller
                 });
 
             return view('manager.dashboard', compact('user', 'meals', 'monthMeals', 'thisMonth', 'paid', 'billDue', 'mealBill'));
-
 
             /** Member Dashboard Meal, Bazar Detels Show*/
         } elseif (Auth::check() && Auth::user()->role == 'member') {
@@ -144,7 +191,6 @@ class UserController extends Controller
             return view('profile');
         }
     }
-
 
     /**
      * User Data Update
@@ -211,10 +257,7 @@ class UserController extends Controller
         $userEmail = User::where('email', $request->email)->first();
 
         if (!$userEmail) {
-            return back()->withErrors([
-                'email' => 'The Email User not Found',
-
-            ]);
+            return back()->with('error', 'Users Not Found');
         }
         $userEmail->active_token = Str::random(40);
         $userEmail->otp = rand(100000, 999999);

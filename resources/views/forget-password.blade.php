@@ -20,7 +20,6 @@
                         </div>
                         <h4 class="mt-5 font-weight-bold">Forgot Password?</h4>
                         <p class="text-muted">Enter your registered email ID to reset the password</p>
-
                         <form action="{{ route('forget.password') }}" method="POST">
                             @csrf
                             <div class="my-4">

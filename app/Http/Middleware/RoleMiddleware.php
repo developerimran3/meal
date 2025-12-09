@@ -15,11 +15,6 @@ class RoleMiddleware
      */
     public function handle($request, Closure $next, $role)
     {
-        // if (auth()->check() && auth()->user()->role === $role) {
-        //     return $next($request);
-        // }
-
-        // abort(403, 'Unauthorized Access');
 
         // Check if user is logged in
         if (!auth()->check()) {

@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => \App\Http\Middleware\RoleMiddleware::class,
             'loginView' => \App\Http\Middleware\logOutMiddleware::class,
             'logedin' => \App\Http\Middleware\LogedinMiddleware::class,
+            'inactiveUser' => \App\Http\Middleware\InactiveMiddlewere::class,
 
         ]);
     })

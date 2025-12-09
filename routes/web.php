@@ -25,15 +25,22 @@ Route::post('/reset/password', [UserController::class, 'resetPassword'])->name('
 
 
 
-// Meals Show
 Route::middleware(['logedin'])->group(function () {
-    Route::get('/login', [UserController::class, 'loginView'])->name('loginView');
+    Route::get('/login', [UserController::class, 'loginForm'])->name('login.form');
 });
-Route::middleware(['loginView'])->group(function () {
+
+
+
+
+Route::middleware(['loginView',])->group(function () {
     Route::get('/dashboard', [UserController::class, 'goDashboard'])->name('dashboard');
     Route::get('/dashboard/profile', [UserController::class, 'profile'])->name('profile');
-    Route::get('/dashboard/setting', [UserController::class, 'profileSetting'])->name('setting');
     Route::post('/dashboard/update', [UserController::class, 'update'])->name('update');
+
+    Route::get('/profile/active/', [UserController::class, 'activeProfileForm'])->name('active.profile.form');
+    Route::post('/profile/active/', [UserController::class, 'activeProfile'])->name('active.profile');
+    Route::get('/profile/active/success/{token}', [UserController::class, 'activeSuccess'])->name('active.success');
+    // Meals Show
     Route::get('/dashboard/meals', [MealController::class, 'index'])->name('index');
     Route::post('/dashboard/meals/store', [MealController::class, 'store'])->name('meal.store');
     Route::post('/dashboard/update/password', [UserController::class, 'updatePassword'])->name('password.update');
@@ -56,6 +63,8 @@ Route::middleware(['role:manager'])->group(function () {
     Route::get('/dashboard/user/create', [ManagerController::class, 'userCreateShow'])->name('user.create.show');
     Route::post('/dashboard/user/create', [ManagerController::class, 'userCreate'])->name('user.create');
     Route::delete('/dashboard/delete/{id}', [ManagerController::class, 'deleteUser'])->name('user.delete');
+    Route::get('/dashboard/edit/{id}', [ManagerController::class, 'editUser'])->name('user.edit');
+    Route::post('/dashboard/update/{id}', [ManagerController::class, 'updateUser'])->name('user.update');
 });
 
 

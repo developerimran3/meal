@@ -16,7 +16,7 @@ class logOutMiddleware
     public function handle($request, Closure $next)
     {
         if (!auth()->check()) {
-            return redirect()->route('loginView');
+            return redirect()->route('login.form');
         }
 
         return $next($request);

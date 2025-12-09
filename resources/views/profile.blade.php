@@ -61,7 +61,6 @@
                         <div class="col-lg-8">
                             <div class="card">
                                 <div class="card-body">
-
                                     <form action="{{ route('update') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
 
@@ -157,7 +156,6 @@
                                             </button>
                                         </div>
                                     </form>
-
                                 </div>
                             </div>
                         </div>

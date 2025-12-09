@@ -85,7 +85,7 @@
                                     <th>Phone</th>
                                     <th>Set No</th>
                                     <th>Role</th>
-                                    <th>Status</th>
+                                    <th>Account Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -105,13 +105,20 @@
                                         <td>{{ $item->phone }}</td>
                                         <td>Set- {{ $item->set_no }}</td>
                                         <td class="text-capitalize fw-bold">{{ $item->role }}</td>
-                                        <td class="text-capitalize">{{ $item->status }}</td>
                                         <td>
+                                            <a
+                                                class="btn btn-sm radius-30 {{ $item->is_active ? 'btn-success' : 'btn-warning' }}">
+                                                {{ $item->is_active ? 'Activated' : 'Pending' }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a
+                                                href="{{ route('user.edit', $item->id) }}"class="btn btn-sm btn-warning">Edit</a>
                                             <form action="{{ route('user.delete', $item->id) }}" method="POST"
-                                                onsubmit="return confirm('Are you sure?')">
+                                                class="d-inline" onsubmit="return confirm('Are you sure?')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                                <button class="btn btn-sm btn-danger">Delete</button>
                                             </form>
                                         </td>
                                     </tr>

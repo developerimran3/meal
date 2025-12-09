@@ -76,8 +76,15 @@
             </div>
         </div>
     </div>
-    <!--end wrapper-->
-
+    <!-- Bootstrap JS -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!--plugins-->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
+    <script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
+    <script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!--Password show & hide js -->
     <script>
         $(document).ready(function() {
             $("#show_hide_password a").on('click', function(event) {
@@ -94,9 +101,33 @@
             });
         });
     </script>
-    <!--app JS-->
-    @include('layouts.components.footer')
+    <script>
+        $(document).ready(function() {
+            // Toastr Options
+            toastr.options = {
+                "timeOut": "3000",
+                "positionClass": "toast-top-right"
+            };
 
+            // Session Messages
+            @if (Session::has('success'))
+                toastr.success("{{ Session::get('success') }}");
+            @endif
+
+            @if (Session::has('error'))
+                toastr.error("{{ Session::get('error') }}");
+            @endif
+
+            // Validation Errors
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    toastr.error("{{ $error }}");
+                @endforeach
+            @endif
+        });
+    </script>
+    <!--app JS-->
+    <script src="assets/js/app.js"></script>
 </body>
 
 </html>

@@ -35,21 +35,62 @@ class ManagerController extends Controller
             'password' => 'required'
         ]);
 
+
         $password = $request->password;
         $user = User::create([
             'name'     => $request->name,
             // 'username' => Str::slug($request->username) . rand(10, 99),
-            'username' => $request->username,
-            'email'    => $request->email,
-            'phone'    => $request->phone,
-            'set_no'   => $request->set_no,
-            'role'     => $request->role,
-            'password' => Hash::make($request->password),
+            'username'      => $request->username,
+            'email'         => $request->email,
+            'phone'         => $request->phone,
+            'set_no'        => $request->set_no,
+            'role'          => $request->role,
+            'password'      => Hash::make($request->password),
         ]);
         //send Mail
         Mail::to($user->email)->send(new UserRegisterMail($user, $password));
 
         return redirect()->back()->with('success', 'User created successfully!');
+    }
+
+
+    /**
+     * 
+     * Edit User
+     */
+
+    // Edit form
+    public function editUser($id)
+    {
+        $user = User::findOrFail($id);
+
+
+        return view('manager.user_edit', compact('user'));
+    }
+
+    // Update user
+    public function updateUser(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        // Validation
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'phone' => 'nullable|string|max:20',
+        ]);
+
+        // Update user
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+
+        $user->save();
+
+        return redirect()->route('dashboard')
+            ->with('success', 'User updated successfully!');
     }
 
     /**
